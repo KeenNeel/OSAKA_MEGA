@@ -1,0 +1,2570 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>🔴 大阪WEB！メガ！ 🔴</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --tigers-yellow: #ffcc00;
+  --tigers-yellow2: #e6b800;
+  --tigers-yellow3: #ffe066;
+  --tigers-black: #000000;
+  --tigers-white: #ffffff;
+  --accent-blue: #0044cc;
+  --cream: #fffdf5;
+  --pink-light: #fff5f0;
+  --yellow-bg: #fffbe6;
+  --text-main: #1a1a1a;
+  --text-muted: #666060;
+  --border: #f0e6da;
+  --shadow-tigers: 0 4px 20px rgba(255,204,0,0.18);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+body.dark {
+  --tigers-yellow: #e6b800;
+  --tigers-black: #0a0a0f;
+  --cream: #141010;
+  --pink-light: #1f1a18;
+  --yellow-bg: #1e1b10;
+  --text-main: #f5e8e8;
+  --text-muted: #a0a0a0;
+  --border: #3a3020;
+  --shadow-tigers: 0 4px 20px rgba(230,184,0,0.25);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body { font-family: 'Noto Sans JP', sans-serif; background: var(--cream); color: var(--text-main); min-height: 100vh; font-size: 14px; }
+
+/* ===== HEADER ===== */
+.site-header {
+  background: linear-gradient(135deg, var(--tigers-black) 0%, #1a1a1a 60%, #333333 100%);
+  color: white;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 4px solid var(--tigers-yellow);
+}
+.header-bg-pattern {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.03) 0%, transparent 40%);
+}
+.header-inner {
+  position: relative; z-index: 1;
+  padding: 16px 16px 0;
+  display: flex; align-items: flex-start; justify-content: space-between;
+}
+.header-logo {
+  flex: 1;
+}
+.logo-badge {
+  background: var(--tigers-yellow);
+  color: var(--tigers-black);
+  font-size: 9px; font-weight: 900;
+  padding: 2px 8px; border-radius: 20px;
+  display: inline-block; margin-bottom: 4px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.logo-title {
+  font-size: 1.6rem; font-weight: 900;
+  line-height: 1.1; letter-spacing: -0.01em;
+  color: var(--tigers-white);
+}
+.logo-title .tigers-y {
+  color: var(--tigers-yellow);
+  display: inline-block;
+}
+.logo-sub {
+  font-size: 0.7rem; opacity: 0.85;
+  margin-top: 2px; letter-spacing: 0.05em;
+  line-height: 1.4;
+  color: var(--tigers-white);
+}
+.header-controls { display: flex; gap: 6px; flex-shrink: 0; }
+.ctrl-btn {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white; padding: 6px 10px;
+  border-radius: 20px; font-size: 0.7rem;
+  cursor: pointer; font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+/* Stats bar */
+.header-stats {
+  position: relative; z-index: 1;
+  display: flex; gap: 0;
+  padding: 12px 16px 0;
+  overflow-x: auto; scrollbar-width: none;
+}
+.header-stats::-webkit-scrollbar { display: none; }
+.stat-chip {
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.08);
+  border-radius: 20px; padding: 5px 12px;
+  font-size: 0.72rem; color: white;
+  border: 1px solid rgba(255,255,255,0.15);
+  margin-right: 6px; font-weight: 500;
+  white-space: nowrap;
+}
+.stat-chip strong { color: var(--tigers-yellow); font-weight: 700; }
+
+/* Datetime */
+.header-datetime {
+  position: relative; z-index: 1;
+  text-align: center; padding: 10px 16px 14px;
+  font-size: 0.78rem; color: rgba(255,255,255,0.7);
+  background: rgba(0,0,0,0.2);
+  margin-top: 12px;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.header-datetime strong { color: var(--tigers-yellow); font-weight: 700; font-size: 0.9rem; }
+
+/* ===== NAV ===== */
+.nav-bar {
+  background: var(--tigers-black);
+  position: sticky; top: 0; z-index: 200;
+  display: flex; overflow-x: auto; scrollbar-width: none;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  border-bottom: 2px solid var(--tigers-yellow);
+}
+.nav-bar::-webkit-scrollbar { display: none; }
+.nav-btn {
+  flex-shrink: 0;
+  background: none; border: none;
+  color: rgba(255,255,255,0.6);
+  padding: 12px 14px 10px;
+  font-size: 0.72rem; font-weight: 600;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap; transition: all 0.15s;
+  font-family: 'Noto Sans JP', sans-serif;
+  letter-spacing: 0.02em;
+}
+.nav-btn .nav-icon { display: block; font-size: 1.1rem; margin-bottom: 1px; }
+.nav-btn.active { color: var(--tigers-yellow); border-bottom-color: var(--tigers-yellow); }
+.nav-btn:hover { color: white; }
+
+/* ===== SECTIONS ===== */
+.section { display: none; padding: 14px 12px; max-width: 520px; margin: 0 auto; }
+.section.active { display: block; }
+
+/* ===== CARDS ===== */
+.card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-tigers);
+  border: 1px solid var(--border);
+  animation: slideUp 0.25s ease both;
+  overflow: hidden;
+}
+body.dark .card { background: #1a1a1f; border-color: #30303a; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.card + .card { animation-delay: 0.05s; }
+.card + .card + .card { animation-delay: 0.1s; }
+.card + .card + .card + .card { animation-delay: 0.15s; }
+
+/* Card header */
+.card-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--yellow-bg);
+}
+.card-title {
+  font-size: 0.95rem; font-weight: 800;
+  color: var(--tigers-black); display: flex; align-items: center; gap: 6px;
+}
+body.dark .card-title { color: var(--tigers-yellow); }
+.card-link {
+  font-size: 0.68rem; color: var(--text-muted);
+  text-decoration: none; padding: 3px 8px;
+  background: var(--yellow-bg); border-radius: 20px;
+  border: 1px solid var(--border); white-space: nowrap;
+}
+.card-link:hover { background: var(--tigers-yellow); color: var(--tigers-black); }
+
+/* ===== TIP ITEMS ===== */
+.tip {
+  background: var(--yellow-bg);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border-left: 4px solid var(--tigers-yellow);
+  position: relative;
+}
+body.dark .tip { background: #2a2a20; }
+.tip-title {
+  font-size: 0.88rem; font-weight: 800;
+  color: var(--text-main); margin-bottom: 5px;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+.tip-title .tip-badge {
+  font-size: 0.62rem; font-weight: 700;
+  padding: 1px 7px; border-radius: 10px;
+  background: var(--tigers-yellow); color: var(--tigers-black);
+  letter-spacing: 0.05em;
+}
+.tip-title .tip-badge.black { background: var(--tigers-black); color: white; }
+.tip-body {
+  font-size: 0.8rem; line-height: 1.65; color: var(--text-main);
+}
+.tip-body a { color: var(--accent-blue); text-decoration: none; font-weight: 600; }
+body.dark .tip-body a { color: #66aaff; }
+.tip-meta {
+  margin-top: 8px;
+  font-size: 0.7rem; color: var(--text-muted);
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.tip-meta span { display: flex; align-items: center; gap: 3px; }
+
+/* Action buttons in tips */
+.tip-actions { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.act-btn {
+  padding: 5px 12px; border-radius: 20px;
+  font-size: 0.72rem; font-weight: 700;
+  cursor: pointer; border: 2px solid var(--tigers-yellow);
+  background: transparent; color: var(--tigers-black);
+  transition: all 0.15s; letter-spacing: 0.02em;
+}
+body.dark .act-btn { color: var(--tigers-yellow); }
+.act-btn:hover, .act-btn:active { background: var(--tigers-yellow); color: var(--tigers-black); }
+.act-btn.filled { background: var(--tigers-yellow); color: var(--tigers-black); }
+.act-btn.black { border-color: var(--tigers-black); color: var(--tigers-black); }
+body.dark .act-btn.black { border-color: var(--tigers-white); color: var(--tigers-white); }
+.act-btn.black:hover { background: var(--tigers-black); color: white; }
+body.dark .act-btn.black:hover { background: var(--tigers-white); color: var(--tigers-black); }
+
+/* ===== SECTION LABEL ===== */
+.section-label {
+  font-size: 0.68rem; font-weight: 800;
+  color: var(--tigers-black); letter-spacing: 0.12em;
+  text-transform: uppercase; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+body.dark .section-label { color: var(--tigers-yellow); }
+.section-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, var(--border), transparent);
+}
+
+/* ===== GRID & QUICK BTNS ===== */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+.q-btn {
+  background: var(--yellow-bg); border-radius: var(--radius-sm);
+  padding: 10px 8px; border: 1.5px solid var(--border);
+  cursor: pointer; transition: all 0.15s; text-align: left;
+}
+body.dark .q-btn { background: #2a2a20; border-color: #3a3020; }
+.q-btn:hover, .q-btn:active { border-color: var(--tigers-yellow); background: white; box-shadow: var(--shadow-sm); }
+body.dark .q-btn:hover { background: #3a302a; }
+.q-btn-icon { font-size: 1.3rem; display: block; margin-bottom: 4px; }
+.q-btn-label { font-size: 0.72rem; font-weight: 700; color: var(--text-main); }
+.q-btn-sub { font-size: 0.65rem; color: var(--text-muted); margin-top: 2px; }
+
+/* ===== NEWS LINKS ===== */
+.news-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px; border-radius: var(--radius-sm);
+  background: var(--yellow-bg); margin-bottom: 8px;
+  border-left: 4px solid transparent;
+  cursor: pointer; transition: all 0.15s; text-decoration: none;
+}
+.news-link:hover { border-left-color: var(--tigers-yellow); background: white; }
+body.dark .news-link { background: #2a2a20; }
+.news-link-icon { font-size: 1.6rem; flex-shrink: 0; }
+.news-link-text { flex: 1; }
+.news-link-name { font-size: 0.85rem; font-weight: 700; color: var(--text-main); }
+.news-link-desc { font-size: 0.7rem; color: var(--text-muted); margin-top: 1px; }
+.news-link-arr { color: var(--tigers-yellow2); font-size: 0.9rem; flex-shrink: 0; }
+body.dark .news-link-arr { color: var(--tigers-yellow); }
+
+/* ===== WEATHER ===== */
+.weather-main {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px; background: var(--yellow-bg); border-radius: var(--radius-sm);
+}
+.weather-icon { font-size: 3.2rem; }
+.weather-temp { font-size: 2.8rem; font-weight: 200; color: var(--tigers-black); line-height: 1; }
+body.dark .weather-temp { color: var(--tigers-white); }
+.weather-info { flex: 1; }
+.weather-desc { font-size: 0.82rem; color: var(--text-main); font-weight: 600; }
+.weather-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 3px; }
+.weather-sub span { margin-right: 10px; }
+.forecast-row { display: flex; gap: 6px; margin-top: 10px; }
+.forecast-item {
+  flex: 1; background: var(--yellow-bg); border-radius: var(--radius-sm);
+  padding: 8px 6px; text-align: center; border: 1px solid var(--border);
+}
+.fc-day { font-size: 0.68rem; color: var(--text-muted); font-weight: 600; }
+.fc-icon { font-size: 1.4rem; margin: 2px 0; }
+.fc-temp { font-size: 0.7rem; font-weight: 700; color: var(--tigers-black); }
+body.dark .fc-temp { color: var(--tigers-white); }
+.fc-low { color: var(--text-muted); }
+
+/* ===== TIGERS SECTION ===== */
+.tigers-header {
+  background: linear-gradient(135deg, var(--tigers-black) 0%, #1a1a1a 100%);
+  border-radius: var(--radius-sm); padding: 16px;
+  color: white; margin-bottom: 12px; position: relative; overflow: hidden;
+  border: 2px solid var(--tigers-yellow);
+}
+.tigers-header::before {
+  content: '🐯';
+  position: absolute; right: -10px; top: -15px;
+  font-size: 5rem; opacity: 0.15;
+}
+.tigers-header-label { font-size: 0.68rem; opacity: 0.8; letter-spacing: 0.1em; font-weight: 600; color: var(--tigers-yellow); }
+.tigers-header-title { font-size: 1.2rem; font-weight: 900; margin-top: 2px; color: var(--tigers-white); }
+.tigers-header-sub { font-size: 0.75rem; opacity: 0.85; margin-top: 4px; color: var(--tigers-white); }
+
+/* Quick info pills */
+.info-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+.pill {
+  padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 700;
+  background: var(--yellow-bg); border: 1.5px solid var(--border); color: var(--text-main);
+}
+.pill.yellow { background: var(--tigers-yellow); color: var(--tigers-black); border-color: var(--tigers-yellow); }
+.pill.black { background: var(--tigers-black); color: white; border-color: var(--tigers-black); }
+body.dark .pill.black { background: var(--tigers-white); color: var(--tigers-black); border-color: var(--tigers-white); }
+
+/* ===== MAP ===== */
+.map-frame {
+  width: 100%; height: 220px; border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border); background: var(--yellow-bg);
+}
+.map-status {
+  font-size: 0.75rem; color: var(--text-muted);
+  text-align: center; padding: 8px; margin-bottom: 6px;
+}
+
+/* ===== SEARCH ===== */
+.search-bar { display: flex; gap: 6px; }
+.search-input {
+  flex: 1; padding: 10px 14px; border-radius: 20px;
+  border: 2px solid var(--border); background: var(--yellow-bg);
+  font-size: 0.85rem; color: var(--text-main);
+  outline: none; font-family: 'Noto Sans JP', sans-serif;
+}
+body.dark .search-input { background: #2a2a20; border-color: #3a3020; }
+.search-input:focus { border-color: var(--tigers-yellow); }
+.search-go {
+  padding: 10px 18px; background: var(--tigers-yellow); color: var(--tigers-black);
+  border: none; border-radius: 20px; font-size: 0.82rem;
+  font-weight: 700; cursor: pointer;
+}
+
+/* Primary button--- START OF FILE osaka_index.html ---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>🔴 大阪WEB！メガ！ 🔴</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --tigers-yellow: #ffcc00;
+  --tigers-yellow2: #e6b800;
+  --tigers-yellow3: #ffe066;
+  --tigers-black: #000000;
+  --tigers-white: #ffffff;
+  --accent-blue: #0044cc;
+  --cream: #fffdf5;
+  --pink-light: #fff5f0;
+  --yellow-bg: #fffbe6;
+  --text-main: #1a1a1a;
+  --text-muted: #666060;
+  --border: #f0e6da;
+  --shadow-tigers: 0 4px 20px rgba(255,204,0,0.18);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+body.dark {
+  --tigers-yellow: #e6b800;
+  --tigers-black: #0a0a0f;
+  --cream: #141010;
+  --pink-light: #1f1a18;
+  --yellow-bg: #1e1b10;
+  --text-main: #f5e8e8;
+  --text-muted: #a0a0a0;
+  --border: #3a3020;
+  --shadow-tigers: 0 4px 20px rgba(230,184,0,0.25);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body { font-family: 'Noto Sans JP', sans-serif; background: var(--cream); color: var(--text-main); min-height: 100vh; font-size: 14px; }
+
+/* ===== HEADER ===== */
+.site-header {
+  background: linear-gradient(135deg, var(--tigers-black) 0%, #1a1a1a 60%, #333333 100%);
+  color: white;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 4px solid var(--tigers-yellow);
+}
+.header-bg-pattern {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.03) 0%, transparent 40%);
+}
+.header-inner {
+  position: relative; z-index: 1;
+  padding: 16px 16px 0;
+  display: flex; align-items: flex-start; justify-content: space-between;
+}
+.header-logo {
+  flex: 1;
+}
+.logo-badge {
+  background: var(--tigers-yellow);
+  color: var(--tigers-black);
+  font-size: 9px; font-weight: 900;
+  padding: 2px 8px; border-radius: 20px;
+  display: inline-block; margin-bottom: 4px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.logo-title {
+  font-size: 1.6rem; font-weight: 900;
+  line-height: 1.1; letter-spacing: -0.01em;
+  color: var(--tigers-white);
+}
+.logo-title .tigers-y {
+  color: var(--tigers-yellow);
+  display: inline-block;
+}
+.logo-sub {
+  font-size: 0.7rem; opacity: 0.85;
+  margin-top: 2px; letter-spacing: 0.05em;
+  line-height: 1.4;
+  color: var(--tigers-white);
+}
+.header-controls { display: flex; gap: 6px; flex-shrink: 0; }
+.ctrl-btn {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white; padding: 6px 10px;
+  border-radius: 20px; font-size: 0.7rem;
+  cursor: pointer; font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+/* Stats bar */
+.header-stats {
+  position: relative; z-index: 1;
+  display: flex; gap: 0;
+  padding: 12px 16px 0;
+  overflow-x: auto; scrollbar-width: none;
+}
+.header-stats::-webkit-scrollbar { display: none; }
+.stat-chip {
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.08);
+  border-radius: 20px; padding: 5px 12px;
+  font-size: 0.72rem; color: white;
+  border: 1px solid rgba(255,255,255,0.15);
+  margin-right: 6px; font-weight: 500;
+  white-space: nowrap;
+}
+.stat-chip strong { color: var(--tigers-yellow); font-weight: 700; }
+
+/* Datetime */
+.header-datetime {
+  position: relative; z-index: 1;
+  text-align: center; padding: 10px 16px 14px;
+  font-size: 0.78rem; color: rgba(255,255,255,0.7);
+  background: rgba(0,0,0,0.2);
+  margin-top: 12px;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.header-datetime strong { color: var(--tigers-yellow); font-weight: 700; font-size: 0.9rem; }
+
+/* ===== NAV ===== */
+.nav-bar {
+  background: var(--tigers-black);
+  position: sticky; top: 0; z-index: 200;
+  display: flex; overflow-x: auto; scrollbar-width: none;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  border-bottom: 2px solid var(--tigers-yellow);
+}
+.nav-bar::-webkit-scrollbar { display: none; }
+.nav-btn {
+  flex-shrink: 0;
+  background: none; border: none;
+  color: rgba(255,255,255,0.6);
+  padding: 12px 14px 10px;
+  font-size: 0.72rem; font-weight: 600;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap; transition: all 0.15s;
+  font-family: 'Noto Sans JP', sans-serif;
+  letter-spacing: 0.02em;
+}
+.nav-btn .nav-icon { display: block; font-size: 1.1rem; margin-bottom: 1px; }
+.nav-btn.active { color: var(--tigers-yellow); border-bottom-color: var(--tigers-yellow); }
+.nav-btn:hover { color: white; }
+
+/* ===== SECTIONS ===== */
+.section { display: none; padding: 14px 12px; max-width: 520px; margin: 0 auto; }
+.section.active { display: block; }
+
+/* ===== CARDS ===== */
+.card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-tigers);
+  border: 1px solid var(--border);
+  animation: slideUp 0.25s ease both;
+  overflow: hidden;
+}
+body.dark .card { background: #1a1a1f; border-color: #30303a; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.card + .card { animation-delay: 0.05s; }
+.card + .card + .card { animation-delay: 0.1s; }
+.card + .card + .card + .card { animation-delay: 0.15s; }
+
+/* Card header */
+.card-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--yellow-bg);
+}
+.card-title {
+  font-size: 0.95rem; font-weight: 800;
+  color: var(--tigers-black); display: flex; align-items: center; gap: 6px;
+}
+body.dark .card-title { color: var(--tigers-yellow); }
+.card-link {
+  font-size: 0.68rem; color: var(--text-muted);
+  text-decoration: none; padding: 3px 8px;
+  background: var(--yellow-bg); border-radius: 20px;
+  border: 1px solid var(--border); white-space: nowrap;
+}
+.card-link:hover { background: var(--tigers-yellow); color: var(--tigers-black); }
+
+/* ===== TIP ITEMS ===== */
+.tip {
+  background: var(--yellow-bg);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border-left: 4px solid var(--tigers-yellow);
+  position: relative;
+}
+body.dark .tip { background: #2a2a20; }
+.tip-title {
+  font-size: 0.88rem; font-weight: 800;
+  color: var(--text-main); margin-bottom: 5px;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+.tip-title .tip-badge {
+  font-size: 0.62rem; font-weight: 700;
+  padding: 1px 7px; border-radius: 10px;
+  background: var(--tigers-yellow); color: var(--tigers-black);
+  letter-spacing: 0.05em;
+}
+.tip-title .tip-badge.black { background: var(--tigers-black); color: white; }
+.tip-body {
+  font-size: 0.8rem; line-height: 1.65; color: var(--text-main);
+}
+.tip-body a { color: var(--accent-blue); text-decoration: none; font-weight: 600; }
+body.dark .tip-body a { color: #66aaff; }
+.tip-meta {
+  margin-top: 8px;
+  font-size: 0.7rem; color: var(--text-muted);
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.tip-meta span { display: flex; align-items: center; gap: 3px; }
+
+/* Action buttons in tips */
+.tip-actions { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.act-btn {
+  padding: 5px 12px; border-radius: 20px;
+  font-size: 0.72rem; font-weight: 700;
+  cursor: pointer; border: 2px solid var(--tigers-yellow);
+  background: transparent; color: var(--tigers-black);
+  transition: all 0.15s; letter-spacing: 0.02em;
+}
+body.dark .act-btn { color: var(--tigers-yellow); }
+.act-btn:hover, .act-btn:active { background: var(--tigers-yellow); color: var(--tigers-black); }
+.act-btn.filled { background: var(--tigers-yellow); color: var(--tigers-black); }
+.act-btn.black { border-color: var(--tigers-black); color: var(--tigers-black); }
+body.dark .act-btn.black { border-color: var(--tigers-white); color: var(--tigers-white); }
+.act-btn.black:hover { background: var(--tigers-black); color: white; }
+body.dark .act-btn.black:hover { background: var(--tigers-white); color: var(--tigers-black); }
+
+/* ===== SECTION LABEL ===== */
+.section-label {
+  font-size: 0.68rem; font-weight: 800;
+  color: var(--tigers-black); letter-spacing: 0.12em;
+  text-transform: uppercase; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+body.dark .section-label { color: var(--tigers-yellow); }
+.section-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, var(--border), transparent);
+}
+
+/* ===== GRID & QUICK BTNS ===== */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+.q-btn {
+  background: var(--yellow-bg); border-radius: var(--radius-sm);
+  padding: 10px 8px; border: 1.5px solid var(--border);
+  cursor: pointer; transition: all 0.15s; text-align: left;
+}
+body.dark .q-btn { background: #2a2a20; border-color: #3a3020; }
+.q-btn:hover, .q-btn:active { border-color: var(--tigers-yellow); background: white; box-shadow: var(--shadow-sm); }
+body.dark .q-btn:hover { background: #3a302a; }
+.q-btn-icon { font-size: 1.3rem; display: block; margin-bottom: 4px; }
+.q-btn-label { font-size: 0.72rem; font-weight: 700; color: var(--text-main); }
+.q-btn-sub { font-size: 0.65rem; color: var(--text-muted); margin-top: 2px; }
+
+/* ===== NEWS LINKS ===== */
+.news-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px; border-radius: var(--radius-sm);
+  background: var(--yellow-bg); margin-bottom: 8px;
+  border-left: 4px solid transparent;
+  cursor: pointer; transition: all 0.15s; text-decoration: none;
+}
+.news-link:hover { border-left-color: var(--tigers-yellow); background: white; }
+body.dark .news-link { background: #2a2a20; }
+.news-link-icon { font-size: 1.6rem; flex-shrink: 0; }
+.news-link-text { flex: 1; }
+.news-link-name { font-size: 0.85rem; font-weight: 700; color: var(--text-main); }
+.news-link-desc { font-size: 0.7rem; color: var(--text-muted); margin-top: 1px; }
+.news-link-arr { color: var(--tigers-yellow2); font-size: 0.9rem; flex-shrink: 0; }
+body.dark .news-link-arr { color: var(--tigers-yellow); }
+
+/* ===== WEATHER ===== */
+.weather-main {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px; background: var(--yellow-bg); border-radius: var(--radius-sm);
+}
+.weather-icon { font-size: 3.2rem; }
+.weather-temp { font-size: 2.8rem; font-weight: 200; color: var(--tigers-black); line-height: 1; }
+body.dark .weather-temp { color: var(--tigers-white); }
+.weather-info { flex: 1; }
+.weather-desc { font-size: 0.82rem; color: var(--text-main); font-weight: 600; }
+.weather-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 3px; }
+.weather-sub span { margin-right: 10px; }
+.forecast-row { display: flex; gap: 6px; margin-top: 10px; }
+.forecast-item {
+  flex: 1; background: var(--yellow-bg); border-radius: var(--radius-sm);
+  padding: 8px 6px; text-align: center; border: 1px solid var(--border);
+}
+.fc-day { font-size: 0.68rem; color: var(--text-muted); font-weight: 600; }
+.fc-icon { font-size: 1.4rem; margin: 2px 0; }
+.fc-temp { font-size: 0.7rem; font-weight: 700; color: var(--tigers-black); }
+body.dark .fc-temp { color: var(--tigers-white); }
+.fc-low { color: var(--text-muted); }
+
+/* ===== TIGERS SECTION ===== */
+.tigers-header {
+  background: linear-gradient(135deg, var(--tigers-black) 0%, #1a1a1a 100%);
+  border-radius: var(--radius-sm); padding: 16px;
+  color: white; margin-bottom: 12px; position: relative; overflow: hidden;
+  border: 2px solid var(--tigers-yellow);
+}
+.tigers-header::before {
+  content: '🐯';
+  position: absolute; right: -10px; top: -15px;
+  font-size: 5rem; opacity: 0.15;
+}
+.tigers-header-label { font-size: 0.68rem; opacity: 0.8; letter-spacing: 0.1em; font-weight: 600; color: var(--tigers-yellow); }
+.tigers-header-title { font-size: 1.2rem; font-weight: 900; margin-top: 2px; color: var(--tigers-white); }
+.tigers-header-sub { font-size: 0.75rem; opacity: 0.85; margin-top: 4px; color: var(--tigers-white); }
+
+/* Quick info pills */
+.info-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+.pill {
+  padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 700;
+  background: var(--yellow-bg); border: 1.5px solid var(--border); color: var(--text-main);
+}
+.pill.yellow { background: var(--tigers-yellow); color: var(--tigers-black); border-color: var(--tigers-yellow); }
+.pill.black { background: var(--tigers-black); color: white; border-color: var(--tigers-black); }
+body.dark .pill.black { background: var(--tigers-white); color: var(--tigers-black); border-color: var(--tigers-white); }
+
+/* ===== MAP ===== */
+.map-frame {
+  width: 100%; height: 220px; border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border); background: var(--yellow-bg);
+}
+.map-status {
+  font-size: 0.75rem; color: var(--text-muted);
+  text-align: center; padding: 8px; margin-bottom: 6px;
+}
+
+/* ===== SEARCH ===== */
+.search-bar { display: flex; gap: 6px; }
+.search-input {
+  flex: 1; padding: 10px 14px; border-radius: 20px;
+  border: 2px solid var(--border); background: var(--yellow-bg);
+  font-size: 0.85rem; color: var(--text-main);
+  outline: none; font-family: 'Noto Sans JP', sans-serif;
+}
+body.dark .search-input { background: #2a2a20; border-color: #3a3020; }
+.search-input:focus { border-color: var(--tigers-yellow); }
+.search-go {
+  padding: 10px 18px; background: var(--tigers-yellow); color: var(--tigers-black);
+  border: none; border-radius: 20px; font-size: 0.82rem;
+  font-weight: 700; cursor: pointer;
+}
+
+/* Primary button */
+.btn-primary {
+  width: 100%; padding: 13px;
+  background: linear-gradient(135deg, var(--tigers-yellow), var(--tigers-yellow2));
+  color: var(--tigers-black); border: none; border-radius: 20px;
+  font-size: 0.88rem; font-weight: 800; cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255,204,0,0.35);
+  letter-spacing: 0.02em; font-family: 'Noto Sans JP', sans-serif;
+}
+.btn-primary:active { opacity: 0.85; transform: scale(0.98); }
+
+/* ===== DIALECT CARDS ===== */
+.dialect-item {
+  background: var(--yellow-bg); border-radius: var(--radius-sm);
+  padding: 12px 14px; margin-bottom: 8px;
+  border-left: 4px solid var(--tigers-yellow);
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.dialect-word {
+  font-size: 1rem; font-weight: 900; color: var(--tigers-black);
+  min-width: 80px; flex-shrink: 0;
+}
+body.dark .dialect-word { color: var(--tigers-yellow); }
+.dialect-body { flex: 1; }
+.dialect-meaning { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 2px; }
+.dialect-example { font-size: 0.8rem; line-height: 1.5; color: var(--text-main); }
+.dialect-example em { color: var(--accent-blue); font-style: normal; font-weight: 700; }
+body.dark .dialect-example em { color: #66aaff; }
+
+/* ===== CALCULATOR ===== */
+.calc-group { margin-bottom: 16px; }
+.calc-label { font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; }
+.calc-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.calc-input {
+  flex: 1; padding: 10px 12px; border-radius: 10px;
+  border: 2px solid var(--border); background: var(--yellow-bg);
+  font-size: 1rem; text-align: right; color: var(--text-main);
+  outline: none; font-family: 'Noto Sans JP', sans-serif;
+}
+body.dark .calc-input { background: #2a2a20; border-color: #3a3020; }
+.calc-input:focus { border-color: var(--tigers-yellow); }
+.calc-unit { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); min-width: 24px; }
+.calc-result {
+  text-align: center; padding: 14px;
+  background: linear-gradient(135deg, var(--tigers-black), #333333);
+  border-radius: var(--radius-sm); color: white;
+  border: 2px solid var(--tigers-yellow);
+}
+.calc-result-label { font-size: 0.72rem; opacity: 0.85; font-weight: 600; color: var(--tigers-yellow); }
+.calc-result-val { font-size: 2rem; font-weight: 900; line-height: 1.1; color: var(--tigers-white); }
+.tax-radio-row { display: flex; gap: 10px; margin-bottom: 8px; }
+.tax-radio { display: flex; align-items: center; gap: 4px; font-size: 0.8rem; cursor: pointer; color: var(--text-main); }
+.tax-radio input { accent-color: var(--tigers-black); }
+body.dark .tax-radio input { accent-color: var(--tigers-yellow); }
+
+/* ===== TODO ===== */
+.todo-input-row { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+.todo-input {
+  flex: 1; min-width: 120px; padding: 9px 12px; border-radius: 10px;
+  border: 2px solid var(--border); background: var(--yellow-bg);
+  font-size: 0.82rem; color: var(--text-main); outline: none;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+body.dark .todo-input { background: #2a2a20; border-color: #3a3020; }
+.todo-input:focus { border-color: var(--tigers-yellow); }
+.todo-add-btn {
+  padding: 9px 16px; background: var(--tigers-black); color: white;
+  border: none; border-radius: 10px; font-size: 0.82rem;
+  font-weight: 700; cursor: pointer;
+}
+body.dark .todo-add-btn { background: var(--tigers-yellow); color: var(--tigers-black); }
+.todo-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px; border-radius: 10px;
+  background: var(--yellow-bg); margin-bottom: 6px;
+  border: 1.5px solid var(--border); transition: all 0.15s;
+}
+body.dark .todo-item { background: #2a2a20; border-color: #3a3020; }
+.todo-item.done { opacity: 0.55; }
+.todo-item.done .todo-text { text-decoration: line-through; }
+.todo-cb { width: 18px; height: 18px; accent-color: var(--tigers-black); cursor: pointer; flex-shrink: 0; }
+body.dark .todo-cb { accent-color: var(--tigers-yellow); }
+.todo-text { flex: 1; font-size: 0.82rem; color: var(--text-main); }
+.todo-date { font-size: 0.68rem; color: var(--tigers-black); font-weight: 700; padding: 1px 6px; background: var(--tigers-yellow); border-radius: 10px; }
+.todo-del { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem; padding: 2px 4px; }
+.todo-del:hover { color: var(--tigers-black); }
+body.dark .todo-del:hover { color: var(--tigers-yellow); }
+
+/* ===== DIARY / AI ===== */
+.diary-area {
+  width: 100%; min-height: 90px; padding: 12px;
+  border-radius: 10px; border: 2px solid var(--border);
+  background: var(--yellow-bg); color: var(--text-main);
+  font-size: 0.82rem; line-height: 1.6; resize: vertical;
+  outline: none; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 10px;
+}
+body.dark .diary-area { background: #2a2a20; border-color: #3a3020; }
+.diary-area:focus { border-color: var(--tigers-yellow); box-shadow: 0 0 0 3px rgba(255,204,0,0.1); }
+.diary-label { font-size: 0.78rem; font-weight: 800; color: var(--tigers-black); margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+body.dark .diary-label { color: var(--tigers-yellow); }
+.ai-response-box {
+  display: none; margin-top: 14px; padding: 16px;
+  background: linear-gradient(135deg, #fffdf0, #fffbe6);
+  border-radius: var(--radius-sm); border-left: 4px solid var(--tigers-yellow);
+}
+body.dark .ai-response-box { background: #2a2a20; }
+.ai-response-header { font-size: 0.78rem; font-weight: 800; color: var(--tigers-black); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+body.dark .ai-response-header { color: var(--tigers-yellow); }
+.ai-response-text { font-size: 0.82rem; line-height: 1.75; color: var(--text-main); }
+
+/* ===== TRANSPORT ===== */
+.transport-tab-row { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+.transport-tab {
+  padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+  border: 2px solid var(--border); background: var(--yellow-bg); color: var(--text-main);
+  cursor: pointer;
+}
+.transport-tab.active { background: var(--tigers-black); border-color: var(--tigers-black); color: white; }
+body.dark .transport-tab.active { background: var(--tigers-yellow); border-color: var(--tigers-yellow); color: var(--tigers-black); }
+
+/* ===== GOURMET CATEGORY ===== */
+.gourmet-cat-row { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 14px; scrollbar-width: none; }
+.gourmet-cat-row::-webkit-scrollbar { display: none; }
+.gourmet-cat {
+  flex-shrink: 0; padding: 6px 14px; border-radius: 20px;
+  font-size: 0.75rem; font-weight: 700; border: 2px solid var(--border);
+  background: var(--yellow-bg); color: var(--text-main); cursor: pointer;
+}
+.gourmet-cat.active { background: var(--tigers-black); border-color: var(--tigers-black); color: white; }
+body.dark .gourmet-cat.active { background: var(--tigers-yellow); border-color: var(--tigers-yellow); color: var(--tigers-black); }
+
+/* ===== RATING STARS ===== */
+.stars { color: #ffaa00; font-size: 0.8rem; }
+.rating-num { font-size: 0.7rem; color: var(--text-muted); margin-left: 4px; }
+
+/* ===== HOT INFO BOX ===== */
+.hot-box {
+  background: linear-gradient(135deg, var(--tigers-black), #333333);
+  border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 10px;
+  display: flex; gap: 10px; align-items: flex-start;
+  border: 1px solid var(--tigers-yellow);
+}
+.hot-box-icon { font-size: 1.3rem; flex-shrink: 0; }
+.hot-box-title { font-size: 0.82rem; font-weight: 800; color: var(--tigers-yellow); }
+.hot-box-body { font-size: 0.75rem; color: white; opacity: 0.9; margin-top: 2px; }
+
+/* ===== BADGE HIGHLIGHT ===== */
+.new-badge {
+  display: inline-block; font-size: 0.6rem; font-weight: 800;
+  background: var(--tigers-yellow); color: var(--tigers-black); padding: 1px 5px;
+  border-radius: 4px; margin-left: 4px; vertical-align: middle;
+  letter-spacing: 0.05em; text-transform: uppercase;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center; padding: 24px 16px;
+  font-size: 0.72rem; color: var(--text-muted);
+  border-top: 1px dashed var(--border);
+  background: var(--tigers-black); color: rgba(255,255,255,0.7);
+  margin-top: 20px;
+}
+footer .footer-logo { font-size: 1.1rem; font-weight: 900; color: var(--tigers-yellow); margin-bottom: 4px; }
+
+/* ===== SCROLL TO TOP ===== */
+.scroll-top {
+  position: fixed; bottom: 20px; right: 16px;
+  width: 40px; height: 40px;
+  background: var(--tigers-black); color: var(--tigers-yellow);
+  border: 2px solid var(--tigers-yellow); border-radius: 50%; font-size: 1.1rem;
+  cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 300; opacity: 0; transition: opacity 0.2s;
+}
+.scroll-top.visible { opacity: 1; }
+
+/* ===== TIGERS TICKER ===== */
+.tigers-ticker {
+  background: var(--tigers-yellow); color: var(--tigers-black);
+  font-size: 0.72rem; font-weight: 700; padding: 7px 0;
+  overflow: hidden; white-space: nowrap;
+  border-bottom: 2px solid var(--tigers-black);
+}
+.ticker-inner {
+  display: inline-block;
+  animation: ticker 65s linear infinite;
+}
+@keyframes ticker {
+  0% { transform: translateX(100vw); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ===== DIVIDER ===== */
+.divider { height: 1px; background: var(--border); margin: 14px 0; }
+
+/* ===== ONSEN CARDS ===== */
+.onsen-card {
+  background: var(--yellow-bg); border-radius: var(--radius-sm);
+  padding: 12px 14px; margin-bottom: 8px;
+  border: 1.5px solid var(--border);
+  display: flex; gap: 10px;
+}
+.onsen-emoji { font-size: 1.8rem; flex-shrink: 0; }
+.onsen-info { flex: 1; }
+.onsen-name { font-size: 0.88rem; font-weight: 800; color: var(--text-main); }
+.onsen-access { font-size: 0.7rem; color: var(--text-muted); margin: 2px 0; }
+.onsen-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 5px; }
+.onsen-tag { font-size: 0.65rem; padding: 2px 7px; border-radius: 10px; background: white; border: 1px solid var(--border); color: var(--text-main); }
+body.dark .onsen-tag { background: #3a302a; }
+
+/* ===== CAFE CARDS ===== */
+.cafe-card {
+  background: var(--yellow-bg); border-radius: var(--radius-sm);
+  padding: 12px 14px; margin-bottom: 8px;
+  border: 1.5px solid var(--border);
+}
+.cafe-name { font-size: 0.88rem; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.cafe-area { font-size: 0.68rem; color: var(--tigers-black); font-weight: 700; padding: 1px 7px; background: var(--tigers-yellow); border-radius: 10px; border: 1px solid var(--tigers-black); }
+body.dark .cafe-area { border-color: var(--tigers-yellow); }
+.cafe-desc { font-size: 0.78rem; color: var(--text-main); line-height: 1.55; margin-top: 5px; }
+.cafe-meta { display: flex; gap: 8px; margin-top: 6px; align-items: center; flex-wrap: wrap; }
+
+/* Responsive tweaks */
+@media (max-width: 360px) {
+  .logo-title { font-size: 1.35rem; }
+  .grid2 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="header-bg-pattern"></div>
+  <div class="header-inner">
+    <div class="header-logo">
+      <div class="logo-badge">🐯 TIGERS × 大阪 × MEGA</div>
+      <div class="logo-title" style="display:flex;align-items:center;gap:8px;">大阪<span class="tigers-y">W</span>EB！<span class="tigers-y">メ</span>ガ！<button id="bat-btn" onclick="startBatting()" title="クリックで占いパチーンといくで！" style="background:none;border:none;cursor:pointer;padding:0;line-height:1;user-select:none;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:0.6rem;font-weight:800;color:var(--tigers-yellow);white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,0.8);">バッティング占い！</span><span style="font-size:1.8rem;line-height:1;color:var(--tigers-white);">⚾</span></button></div>
+      <div class="logo-sub">仕事もプライベートも、めっちゃええ毎日になるで✦ 完全版</div>
+      <div id="batting-result" style="display:none;margin-top:6px;font-size:0.75rem;font-weight:700;color:var(--tigers-yellow);line-height:1.5;"></div>
+    </div>
+    <div class="header-controls">
+      <button class="ctrl-btn" onclick="document.body.classList.toggle('dark')">🌙</button>
+    </div>
+  </div>
+  <div class="header-stats">
+    <a class="stat-chip" href="https://weather.yahoo.co.jp/weather/27/6200.html" target="_blank" style="text-decoration:none;color:white;">🌡️ 大阪市 <strong id="hdr-temp">--°C</strong></a>
+    <a class="stat-chip" href="https://hanshintigers.jp/" target="_blank" style="text-decoration:none;color:white;">🏆 タイガース <strong>2026シーズン爆走中</strong></a>
+    <a class="stat-chip" href="https://www.google.com/maps/search/?api=1&query=たこ焼き+大阪" target="_blank" style="text-decoration:none;color:white;">🐙 たこ焼き <strong>年中無休や！</strong></a>
+    <a class="stat-chip" href="https://www.osaka-bikeshare.discovers.jp/" target="_blank" style="text-decoration:none;color:white;">🚲 バイクシェア <strong>最初の30分165円</strong></a>
+    <a class="stat-chip" href="https://www.usj.co.jp/" target="_blank" style="text-decoration:none;color:white;">🎢 USJ <strong>ユニバ行かへん？</strong></a>
+  </div>
+  <div class="header-datetime">
+    <span>⏰</span>
+    <span><strong id="dt-time">--:--</strong></span>
+    <span id="dt-date">読み込み中や...</span>
+  </div>
+</header>
+
+<!-- TIGERS TICKER -->
+<div class="tigers-ticker">
+  <div class="ticker-inner" id="ticker-inner">⏳ 大阪のニュース取ってきとるから待ってや…</div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="nav-bar">
+  <button class="nav-btn active" onclick="tab('home')"><span class="nav-icon">🏠</span>ホーム</button>
+  <button class="nav-btn" onclick="tab('tigers')"><span class="nav-icon">🐯</span>タイガース</button>
+  <button class="nav-btn" onclick="tab('map')"><span class="nav-icon">📍</span>マップ</button>
+  <button class="nav-btn" onclick="tab('food')"><span class="nav-icon">🐙</span>グルメ</button>
+  <button class="nav-btn" onclick="tab('cafe')"><span class="nav-icon">☕</span>カフェ</button>
+  <button class="nav-btn" onclick="tab('onsen')"><span class="nav-icon">♨️</span>温泉・銭湯</button>
+  <button class="nav-btn" onclick="tab('spot')"><span class="nav-icon">🏯</span>観光</button>
+  <button class="nav-btn" onclick="tab('phrase')"><span class="nav-icon">🗣️</span>大阪弁</button>
+  <button class="nav-btn" onclick="tab('talk')"><span class="nav-icon">💬</span>トーク</button>
+  <button class="nav-btn" onclick="tab('transport')"><span class="nav-icon">🚇</span>交通</button>
+  <button class="nav-btn" onclick="tab('car')"><span class="nav-icon">🚘</span>自動車</button>
+  <button class="nav-btn" onclick="tab('tips')"><span class="nav-icon">📋</span>ローカル</button>
+  <button class="nav-btn" onclick="tab('diary')"><span class="nav-icon">📔</span>日記・AI</button>
+  <button class="nav-btn" onclick="tab('calc')"><span class="nav-icon">🧮</span>計算</button>
+</nav>
+
+<!-- ======== HOME ======== -->
+<div class="section active" id="sec-home">
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">🌤️ 今日の大阪の天気やで</div>
+      <a class="card-link" href="https://weather.yahoo.co.jp/weather/27/6200.html" target="_blank">Yahoo!天気</a>
+    </div>
+    <div id="weather-area">
+      <div class="map-status">⏳ 取得中や…</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">🌧️ 雨雲レーダー（大阪・気象庁）</div>
+      <a class="card-link" href="https://www.jma.go.jp/bosai/nowc/" target="_blank">気象庁ナウキャスト</a>
+    </div>
+    <div style="position:relative; border-radius:var(--radius-sm); overflow:hidden; border:1.5px solid var(--border); background:#1a1a2a;">
+      <canvas id="radar-canvas" style="width:100%; display:block; border-radius:var(--radius-sm);"></canvas>
+      <div id="radar-time" style="position:absolute; bottom:6px; left:8px; font-size:0.65rem; color:#fff; background:rgba(0,0,0,0.6); padding:2px 7px; border-radius:10px;"></div>
+      <button onclick="loadRadar()" style="position:absolute; top:6px; right:6px; background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.3); color:white; font-size:0.7rem; padding:3px 9px; border-radius:10px; cursor:pointer;">🔄 更新</button>
+    </div>
+    <div id="radar-status" style="font-size:0.7rem; color:var(--text-muted); margin-top:6px; text-align:center;">⏳ 雨雲データ取ってきとるで…</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">📰 ビジネス・ニュース</div>
+    </div>
+    <a class="news-link" href="https://www.nikkei.com/" target="_blank">
+      <div class="news-link-icon">📊</div>
+      <div class="news-link-text">
+        <div class="news-link-name">日本経済新聞</div>
+        <div class="news-link-desc">経済・ビジネスニュースの確認や</div>
+      </div>
+      <div class="news-link-arr">›</div>
+    </a>
+    <a class="news-link" href="https://finance.yahoo.co.jp/" target="_blank">
+      <div class="news-link-icon">📈</div>
+      <div class="news-link-text">
+        <div class="news-link-name">Yahoo!ファイナンス</div>
+        <div class="news-link-desc">株価・企業業績チェックや</div>
+      </div>
+      <div class="news-link-arr">›</div>
+    </a>
+    <a class="news-link" href="https://www.nhk.or.jp/osaka/" target="_blank">
+      <div class="news-link-icon">📡</div>
+      <div class="news-link-text">
+        <div class="news-link-name">NHK 大阪放送局</div>
+        <div class="news-link-desc">地元ニュース・気象情報やで</div>
+      </div>
+      <div class="news-link-arr">›</div>
+    </a>
+    <a class="news-link" href="https://osaka.pro/" target="_blank">
+      <div class="news-link-icon">🏭</div>
+      <div class="news-link-text">
+        <div class="news-link-name">大阪経済新聞</div>
+        <div class="news-link-desc">地元企業・ベンチャーニュースに強いんや</div>
+      </div>
+      <div class="news-link-arr">›</div>
+    </a>
+    <a class="news-link" href="https://www.mbs.jp/news/" target="_blank">
+      <div class="news-link-icon">📻</div>
+      <div class="news-link-text">
+        <div class="news-link-name">MBSニュース</div>
+        <div class="news-link-desc">タイガース情報も充実！地元TV局</div>
+      </div>
+      <div class="news-link-arr">›</div>
+    </a>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">🔥 NEW! 2025〜2026 新スポット情報</div>
+    </div>
+    <div class="hot-box">
+      <div class="hot-box-icon">🏗️</div>
+      <div>
+        <div class="hot-box-title">大阪・関西万博（Expo 2025） <span class="new-badge">NEW</span></div>
+        <div class="hot-box-body">2025年4月開幕！夢洲（ゆめしま）で開催される未来のショーケースや。世界中から最新技術と文化が集まるんや、絶対行かな損やで！</div>
+      </div>
+    </div>
+    <div class="hot-box">
+      <div class="hot-box-icon">🛍️</div>
+      <div>
+        <div class="hot-box-title">グラングリーン大阪（うめきた2期） <span class="new-badge">NEW</span></div>
+        <div class="hot-box-body">梅田のど真ん中に巨大な公園と商業施設が誕生。2025年から段階的にオープンしとる。買い物も散歩もこれからの梅田の顔や。</div>
+      </div>
+    </div>
+    <div class="hot-box">
+      <div class="hot-box-icon">🚇</div>
+      <div>
+        <div class="hot-box-title">Osaka Metro 中央線延伸（夢洲駅） <span class="new-badge">NEW</span></div>
+        <div class="hot-box-body">万博会場の夢洲へ直結する新駅が登場。市内からのアクセスがめっちゃ便利になったんや。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">⚡ クイックリンク</div>
+    </div>
+    <div class="grid3">
+      <div class="q-btn" onclick="window.open('https://www.osaka-bikeshare.discovers.jp/','_blank')">
+        <span class="q-btn-icon">🚲</span>
+        <div class="q-btn-label">バイクシェア</div>
+        <div class="q-btn-sub">シェアサイクル</div>
+      </div>
+      <div class="q-btn" onclick="window.open('https://hanshintigers.jp/ticket/','_blank')">
+        <span class="q-btn-icon">🐯</span>
+        <div class="q-btn-label">タイガース公式</div>
+        <div class="q-btn-sub">チケット購入</div>
+      </div>
+      <div class="q-btn" onclick="window.open('https://subway.osakametro.co.jp/guide/routemap.php','_blank')">
+        <span class="q-btn-icon">🚇</span>
+        <div class="q-btn-label">メトロ路線図</div>
+        <div class="q-btn-sub">地下鉄マップ</div>
+      </div>
+      <div class="q-btn" onclick="window.open('https://www.jr-odekake.net/ekikan/kanjo/','_blank')">
+        <span class="q-btn-icon">🚃</span>
+        <div class="q-btn-label">JR環状線</div>
+        <div class="q-btn-sub">時刻表・運行情報</div>
+      </div>
+      <div class="q-btn" onclick="window.open('https://www.nankai.co.jp/','_blank')">
+        <span class="q-btn-icon">🚈</span>
+        <div class="q-btn-label">南海電鉄</div>
+        <div class="q-btn-sub">関空アクセス</div>
+      </div>
+      <div class="q-btn" onclick="window.open('https://www.kintetsu.co.jp/','_blank')">
+        <span class="q-btn-icon">🚄</span>
+        <div class="q-btn-label">近鉄電車</div>
+        <div class="q-btn-sub">奈良・名古屋方面</div>
+      </div>
+      <div class="q-btn" onclick="window.open('https://www.usj.co.jp/','_blank')">
+        <span class="q-btn-icon">🎢</span>
+        <div class="q-btn-label">USJ</div>
+        <div class="q-btn-sub">ユニバ公式</div>
+      </div>
+      <div class="q-btn" onclick="window.open('https://osaka-info.jp/','_blank')">
+        <span class="q-btn-icon">🏯</span>
+        <div class="q-btn-label">大阪観光局</div>
+        <div class="q-btn-sub">公式ガイド</div>
+      </div>
+      <div class="q-btn" onclick="window.open('https://www.jma-net.go.jp/osaka/','_blank')">
+        <span class="q-btn-icon">⛈️</span>
+        <div class="q-btn-label">大阪管区気象台</div>
+        <div class="q-btn-sub">防災・警報</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== TIGERS ======== -->
+<div class="section" id="sec-tigers">
+  <div class="card">
+    <div class="tigers-header">
+      <div class="tigers-header-label">HANSHIN TIGERS 2026</div>
+      <div class="tigers-header-title">🐯 猛虎爆走！</div>
+      <div class="tigers-header-sub">阪神タイガース情報センターや。岡田彰布監督のもと連覇、いや常勝軍団を目指すんや！</div>
+    </div>
+    <div class="info-pills">
+      <div class="pill yellow">2026シーズン開幕中</div>
+      <div class="pill black">近本・中野・大山に注目</div>
+      <div class="pill">ホーム：阪神甲子園球場</div>
+    </div>
+    <div class="section-label">🎫 チケット購入</div>
+    <div class="grid2">
+      <div class="q-btn" onclick="window.open('https://hanshintigers.jp/ticket/','_blank')">
+        <span class="q-btn-icon">🎫</span>
+        <div class="q-btn-label">タイガース公式</div>
+        <div class="q-btn-sub">一番確実やで</div>
+      </div>
+      <div class="q-btn" onclick="window.open('https://l-tike.com/sports/tigers/','_blank')">
+        <span class="q-btn-icon">🎟️</span>
+        <div class="q-btn-label">ローチケ</div>
+        <div class="q-btn-sub">コンビニ受取OK</div>
+      </div>
+      <div class="q-btn" onclick="window.open('https://t.pia.jp/sports/baseball/tigers/','_blank')">
+        <span class="q-btn-icon">🎪</span>
+        <div class="q-btn-label">チケットぴあ</div>
+        <div class="q-btn-sub">座席選択可</div>
+      </div>
+      <div class="q-btn" onclick="window.open('https://eplus.jp/tigers/','_blank')">
+        <span class="q-btn-icon">➕</span>
+        <div class="q-btn-label">イープラス</div>
+        <div class="q-btn-sub">e+でも買えるわ</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="section-label">🏟️ 聖地・甲子園球場完全攻略</div>
+    <div class="tip">
+      <div class="tip-title">🚶 アクセス方法 <span class="tip-badge yellow">基本</span></div>
+      <div class="tip-body">阪神電車「梅田駅」から特急で約15分、<strong>「甲子園駅」</strong>下車すぐ！これ以外は考えられへん。試合終了後は大混雑するから、帰りの切符は先に買っとくかICカード満タンにしとくんやで。</div>
+      <div class="tip-actions">
+        <button class="act-btn" onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=阪神甲子園球場','_blank')">🗺️ ルート検索</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🛒 チームショップ・アルプス</div>
+      <div class="tip-body">球場すぐそばの巨大グッズショップ。試合のない日でも開いとるから、タイガースファンにはたまらん。ユニフォーム、メガホン、虎グッズ何でも揃うで。</div>
+      <div class="tip-actions">
+        <button class="act-btn black" onclick="window.open('https://shop.hanshintigers.jp/','_blank')">🛒 グッズ情報</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🍺 甲子園グルメ完全版</div>
+      <div class="tip-body">甲子園言うたら「甲子園カレー」「甲子園やきそば」「甲子園ホルモン」！これに冷えたビールが最高や。選手コラボメニューも毎年変わるから要チェックやで。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">💺 座席ガイド <span class="tip-badge black">初心者必見</span></div>
+      <div class="tip-body">
+        <strong>ライト外野</strong>：虎党の聖地！応援団と一緒に暴れたいならここ（初心者にはハードル高いかも）。<br>
+        <strong>アイビーシート/ブリーズシート（内野）</strong>：屋根あって快適、じっくり観戦できる定番。<br>
+        <strong>グリーンシート</strong>：バックネット裏の高級席、接待にも。<br>
+        <strong>ビジター応援席（レフトの一部）</strong>：相手チームのファンはここや。間違えて入ったらあかんで。
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="section-label">📻 カープ情報をゲットするけえ</div>
+    <div class="grid2">
+      <div class="q-btn" onclick="window.open('https://www.mbs1179.com/tigers/','_blank')">
+        <span class="q-btn-icon">📻</span>
+        <div class="q-btn-label">MBSラジオ</div>
+        <div class="q-btn-sub">タイガース実況中継</div>
+      </div>
+      <div class="q-btn" onclick="window.open('https://www.daily.co.jp/tigers/','_blank')">
+        <span class="q-btn-icon">🗞️</span>
+        <div class="q-btn-label">デイリースポーツ</div>
+        <div class="q-btn-sub">虎情報と言えばデイリーや</div>
+      </div>
+      <div class="q-btn" onclick="window.open('https://npb.jp/bis/teams/calendar_t_index.html','_blank')">
+        <span class="q-btn-icon">📅</span>
+        <div class="q-btn-label">NPB公式日程</div>
+        <div class="q-btn-sub">全試合スケジュール</div>
+      </div>
+      <div class="q-btn" onclick="window.open('https://hanshintigers.jp/','_blank')">
+        <span class="q-btn-icon">🔴</span>
+        <div class="q-btn-label">公式サイト</div>
+        <div class="q-btn-sub">選手情報・成績</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="section-label">📖 タイガース豆知識</div>
+    <div class="tip">
+      <div class="tip-title">🐯 チーム名の由来</div>
+      <div class="tip-body">1935年の創設時は「大阪タイガース」。由来はデトロイト・タイガースから取ったとも、創業者の一人が寅年やったからとも言われとる。日本で最も歴史のあるプロ野球球団の一つや。甲子園のラッキーセブン、六甲おろしは大正義やで。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🎵 応援歌「六甲おろし」</div>
+      <div class="tip-body">正式名称は「阪神タイガースの歌」。試合に勝ったら球場中で大合唱や。大阪の居酒屋でも勝った日はエンドレスで流れとる。これを歌えな一人前の虎党とは言えへんで。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== MAP ======== -->
+<div class="section" id="sec-map">
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">📍 現在地・ルート検索や</div>
+      <a class="card-link" href="https://maps.google.co.jp/" target="_blank">Google Maps</a>
+    </div>
+    <button class="btn-primary" onclick="initMap()" style="margin-bottom:10px;">📡 現在地を取得してマップ表示するで</button>
+    <div class="map-status" id="map-status">ボタンを押したら現在地周辺を表示するよ</div>
+    <iframe id="map-frame" class="map-frame" src="https://maps.google.co.jp/maps?q=大阪駅&output=embed" allowfullscreen loading="lazy"></iframe>
+    <div class="divider"></div>
+    <div class="section-label">🧭 目的地へのルート</div>
+    <div class="search-bar">
+      <input type="text" id="route-dest" class="search-input" placeholder="例：道頓堀、通天閣、梅田スカイビル">
+      <button class="search-go" onclick="routeTo()">GO</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">🔍 周辺をサクッと検索</div>
+    </div>
+    <div class="grid3">
+      <div class="q-btn" onclick="sn('たこ焼き')"><span class="q-btn-icon">🐙</span><div class="q-btn-label">たこ焼き</div></div>
+      <div class="q-btn" onclick="sn('お好み焼き')"><span class="q-btn-icon">🥘</span><div class="q-btn-label">お好み焼き</div></div>
+      <div class="q-btn" onclick="sn('串カツ')"><span class="q-btn-icon">🍡</span><div class="q-btn-label">串カツ</div></div>
+      <div class="q-btn" onclick="sn('コンビニ')"><span class="q-btn-icon">🏪</span><div class="q-btn-label">コンビニ</div></div>
+      <div class="q-btn" onclick="sn('コインパーキング')"><span class="q-btn-icon">🅿️</span><div class="q-btn-label">駐車場</div></div>
+      <div class="q-btn" onclick="sn('シェアサイクル')"><span class="q-btn-icon">🚲</span><div class="q-btn-label">バイクシェア</div></div>
+      <div class="q-btn" onclick="sn('個室 接待 ランチ')"><span class="q-btn-icon">🥗</span><div class="q-btn-label">個室ランチ</div></div>
+      <div class="q-btn" onclick="sn('ATM 銀行')"><span class="q-btn-icon">🏧</span><div class="q-btn-label">ATM・銀行</div></div>
+      <div class="q-btn" onclick="sn('スーパー銭湯 温泉')"><span class="q-btn-icon">♨️</span><div class="q-btn-label">温泉・銭湯</div></div>
+      <div class="q-btn" onclick="sn('ドラッグストア')"><span class="q-btn-icon">💊</span><div class="q-btn-label">ドラッグストア</div></div>
+      <div class="q-btn" onclick="sn('カフェ おしゃれ')"><span class="q-btn-icon">☕</span><div class="q-btn-label">カフェ</div></div>
+      <div class="q-btn" onclick="sn('居酒屋 ミナミ')"><span class="q-btn-icon">🍺</span><div class="q-btn-label">居酒屋・ミナミ</div></div>
+      <div class="q-btn" onclick="sn('ガソリンスタンド')"><span class="q-btn-icon">⛽</span><div class="q-btn-label">ガソリンスタンド</div></div>
+      <div class="q-btn" onclick="sn('公衆トイレ')"><span class="q-btn-icon">🚻</span><div class="q-btn-label">トイレ</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== FOOD ======== -->
+<div class="section" id="sec-food">
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">🍽️ 大阪グルメ大全やで</div>
+      <a class="card-link" href="https://osaka-info.jp/gourmet/" target="_blank">公式ガイド</a>
+    </div>
+    <div class="hot-box">
+      <div class="hot-box-icon">⚠️</div>
+      <div>
+        <div class="hot-box-title">串カツの「二度づけ」は絶対あかん！</div>
+        <div class="hot-box-body">共有のソースやから、一度口に入れた串をまたソースにつけるのは鉄則で禁止や。ソース足りん時はキャベツでソースすくって串にかけるんやで。</div>
+      </div>
+    </div>
+
+    <div class="section-label">🏆 絶対食べたい！定番ソウルフード</div>
+    <div class="tip">
+      <div class="tip-title">🐙 たこ焼き <span class="tip-badge yellow">殿堂入り</span></div>
+      <div class="tip-body">外はカリッ、中はトロッ。大阪の基本や。<br>
+        <strong>名店：</strong><a href="https://www.google.com/maps/search/?api=1&query=わなか+千日前+大阪" target="_blank">わなか（千日前）</a>・<a href="https://www.google.com/maps/search/?api=1&query=甲賀流+アメリカ村+大阪" target="_blank">甲賀流（アメ村）</a>・<a href="https://www.google.com/maps/search/?api=1&query=くくる+道頓堀+大阪" target="_blank">くくる（道頓堀）</a>・<a href="https://www.google.com/maps/search/?api=1&query=会津屋+梅田+大阪" target="_blank">会津屋（梅田・元祖）</a><br>
+        <strong>食べ方の流儀：</strong>基本は何もつけずに（会津屋など）か、ソース・マヨ。アツアツを一口でいくのが通やけど、火傷に注意や。
+      </div>
+      <div class="tip-meta">
+        <span>⏰ 昼〜深夜</span><span>💰 500〜800円（6-8個）</span><span class="stars">★★★★★</span>
+      </div>
+      <div class="tip-actions">
+        <button class="act-btn filled" onclick="sf('たこ焼き','current')">📍 近くで探す</button>
+        <button class="act-btn black" onclick="sf('たこ焼き わなか','none')">🏆 わなか</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🥘 お好み焼き <span class="tip-badge yellow">ソウルフード</span></div>
+      <div class="tip-body">生地とキャベツを混ぜて焼く「混ぜ焼き」が大阪スタイルや。<br>
+        <strong>名店：</strong><a href="https://www.google.com/maps/search/?api=1&query=きじ+スカイビル+大阪" target="_blank">きじ（スカイビル）</a>・<a href="https://www.google.com/maps/search/?api=1&query=美津の+道頓堀+大阪" target="_blank">美津の（道頓堀）</a>・<a href="https://www.google.com/maps/search/?api=1&query=千房+道頓堀+大阪" target="_blank">千房</a>・<a href="https://www.google.com/maps/search/?api=1&query=鶴橋風月+梅田+大阪" target="_blank">鶴橋風月</a><br>
+        マヨネーズのアートパフォーマンスがある店もあるで。ご飯と一緒に食べる「お好み焼き定食」も大阪では普通や。
+      </div>
+      <div class="tip-meta">
+        <span>💰 1,000〜1,800円</span><span class="stars">★★★★★</span>
+      </div>
+      <div class="tip-actions">
+        <button class="act-btn filled" onclick="sf('お好み焼き','current')">📍 近くで探す</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🍡 串カツ <span class="tip-badge yellow">新世界名物</span></div>
+      <div class="tip-body">牛、豚、野菜、海鮮、何でも揚げたる。サクサクの衣と秘伝ソースや。<br>
+        <strong>名店：</strong><a href="https://www.google.com/maps/search/?api=1&query=だるま+新世界+大阪" target="_blank">だるま（新世界）</a>・<a href="https://www.google.com/maps/search/?api=1&query=八重勝+新世界+大阪" target="_blank">八重勝（新世界）</a>・<a href="https://www.google.com/maps/search/?api=1&query=てんぐ+新世界+大阪" target="_blank">てんぐ（新世界）</a><br>
+        新世界の通天閣周辺が激戦区やけど、梅田や難波にも支店は多い。キャベツはソースをすくうためにも使うんやで。
+      </div>
+      <div class="tip-actions">
+        <button class="act-btn filled" onclick="sf('串カツ 新世界','none')">🗼 新世界で探す</button>
+        <button class="act-btn black" onclick="sf('串カツ だるま','none')">🏆 だるま</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🍖 豚まん（551HORAI） <span class="tip-badge black">大阪の常識</span></div>
+      <div class="tip-body">大阪土産の定番。「ある時〜！ない時〜！」のCMは全大阪人が知っとる。新大阪駅や関空、デパ地下で買える。アツアツをその場で食べるのが最高や。</div>
+      <div class="tip-actions">
+        <button class="act-btn black" onclick="window.open('https://www.551horai.co.jp/shop/','_blank')">🎁 店舗検索</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🍜 大阪うどん ＆ かすうどん</div>
+      <div class="tip-body">昆布ダシが効いた優しいスープが特徴。「きつねうどん」は大阪発祥や。<a href="https://www.google.com/maps/search/?api=1&query=今井+道頓堀+大阪" target="_blank">「道頓堀 今井」</a>が有名。油かす（牛ホルモンを揚げたもの）を入れた「かすうどん」は南大阪のソウルフードで、コクがあってめっちゃ美味い。</div>
+      <div class="tip-actions">
+        <button class="act-btn filled" onclick="sf('かすうどん','current')">📍 かすうどんを探す</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🍱 いか焼き <span class="tip-badge">阪神名物</span></div>
+      <div class="tip-body">お好み焼きとは違う、もちもち生地にいかを混ぜてプレスして焼いたB級グルメ。<a href="https://www.google.com/maps/search/?api=1&query=阪神名物いか焼き+大阪" target="_blank">阪神百貨店の地下</a>はいつも行列や。安くて美味い、大阪のファストフードや。</div>
+    </div>
+
+    <div class="section-label">🍺 居酒屋で食べたいB級グルメ</div>
+    <div class="tip">
+      <div class="tip-title">🍲 どて焼き</div>
+      <div class="tip-body">牛スジ肉を味噌やみりんで長時間煮込んだもの。串カツ屋や居酒屋の定番メニューや。トロトロでビールが進むで。新世界の「てんぐ」のどて焼きは絶品や。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🍖 ホルモン焼き</div>
+      <div class="tip-body">大阪はホルモン文化が根付いとる。鶴橋周辺は焼肉・ホルモンの聖地や。安くてスタミナつくから、営業マンの味方やで。</div>
+      <div class="tip-actions">
+        <button class="act-btn filled" onclick="sf('ホルモン 鶴橋','none')">🥩 鶴橋で探す</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🐟 てっちり（ふぐ鍋） <span class="tip-badge black">日本一</span></div>
+      <div class="tip-body">大阪はふぐの消費量が日本一や。冬は「てっちり」で温まるのが贅沢や。黒門市場とかに名店は多い。</div>
+    </div>
+
+    <div class="section-label">🍡 大阪スイーツ・お土産</div>
+    <div class="tip">
+      <div class="tip-title">🎂 りくろーおじさんのチーズケーキ <span class="tip-badge black">定番</span></div>
+      <div class="tip-body">焼きたてはプルプルふわふわ！底にレーズンが入っとる。1ホール1,000円以下でコスパ最強。難波とかの店舗では焼きたてを求めて行列ができる。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">Bread🍞 高級食パン（乃が美など）</div>
+      <div class="tip-body">乃が美、嵜本（さきもと）など、そのまま食べても美味しい食パンはお土産にめっちゃ喜ばれるで。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🍡 みたらし小餅（千鳥屋）</div>
+      <div class="tip-body">餅の中にみたらしのタレが入っとる。一口サイズで食べやすく、手が汚れへんのがええ。関空や大阪駅のお土産屋で定番や。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== CAFE ======== -->
+<div class="section" id="sec-cafe">
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">☕ 大阪カフェ完全案内</div>
+    </div>
+    <div class="section-label">✨ 話題のカフェ・純喫茶</div>
+    <div class="cafe-card">
+      <div class="cafe-name">喫茶アメリカン<span class="cafe-area">中央区難波</span></div>
+      <div class="cafe-desc">難波のど真ん中にある昭和レトロな純喫茶。ゴージャスなシャンデリアと、これぞ大阪！という雰囲気。名物のホットケーキとメロンソーダは絶対頼むべきや。めっちゃ落ち着くで。</div>
+      <div class="cafe-meta">
+        <span class="stars">★★★★★</span>
+        <span style="font-size:0.7rem; color:var(--text-muted);">💰 1,000〜2,000円</span>
+        <span style="font-size:0.7rem; color:var(--tigers-black);">昭和レトロ</span>
+      </div>
+      <div class="tip-actions" style="margin-top:8px;">
+        <button class="act-btn black" onclick="ms('喫茶アメリカン 難波')">📍 マップ</button>
+      </div>
+    </div>
+    <div class="cafe-card">
+      <div class="cafe-name">MOTO COFFEE（モトコーヒー）<span class="cafe-area">中央区北浜</span></div>
+      <div class="cafe-desc">北浜の土佐堀川沿いにあるオシャレカフェ。テラス席からのリバービューが最高。休日は行列覚悟やけど、並ぶ価値ありや。こだわりのコーヒーと焼き菓子が美味い。</div>
+      <div class="cafe-meta">
+        <span class="stars">★★★★☆</span>
+        <span style="font-size:0.7rem; color:var(--text-muted);">💰 800〜1,500円</span>
+        <span style="font-size:0.7rem; color:var(--tigers-black);">📸 リバービュー</span>
+      </div>
+      <div class="tip-actions" style="margin-top:8px;">
+        <button class="act-btn black" onclick="ms('MOTO COFFEE 北浜')">📍 マップ</button>
+      </div>
+    </div>
+    <div class="cafe-card">
+      <div class="cafe-name">Brooklyn Roasting Company（ブルックリン ロースティング カンパニー）<span class="cafe-area">北浜/難波</span></div>
+      <div class="cafe-desc">NY・ブルックリン発のロースタリーカフェ。北浜店は川沿いのテラスが最高。難波店（なんばEKIKAN）は高架下でインダストリアルな雰囲気がオシャレ。本格的なコーヒーをカジュアルに楽しめる。</div>
+      <div class="cafe-meta">
+        <span class="stars">★★★★☆</span>
+        <span style="font-size:0.7rem; color:var(--text-muted);">💰 600〜1,200円</span>
+      </div>
+      <div class="tip-actions" style="margin-top:8px;">
+        <button class="act-btn black" onclick="ms('Brooklyn Roasting Company 大阪')">📍 マップ</button>
+      </div>
+    </div>
+    <div class="cafe-card">
+      <div class="cafe-name">丸福珈琲店 千日前本店<span class="cafe-area">中央区千日前</span></div>
+      <div class="cafe-desc">昭和9年創業の老舗。独自の抽出法による「深煎りの極み」コーヒーは、コクと香りが別格や。レトロな店内で名物のホットケーキと一緒に楽しんでや。大阪のコーヒー文化の歴史を感じる場所や。</div>
+      <div class="cafe-meta">
+        <span class="stars">★★★★☆</span>
+        <span style="font-size:0.7rem; color:var(--text-muted);">💰 800〜1,500円</span>
+        <span style="font-size:0.7rem; color:var(--tigers-black);">老舗純喫茶</span>
+      </div>
+      <div class="tip-actions" style="margin-top:8px;">
+        <button class="act-btn black" onclick="ms('丸福珈琲店 千日前本店')">📍 マップ</button>
+      </div>
+    </div>
+    <div class="cafe-card">
+      <div class="cafe-name">Garb Weeks（ガーブウィークス）<span class="cafe-area">中央区中之島</span></div>
+      <div class="cafe-desc">中之島公園内にあるリバーサイドカフェ＆レストラン。テラス席がめっちゃ広くて、ランチもディナーも雰囲気最高。デートや女子会にぴったりやで。ピザもパスタもうまい。</div>
+      <div class="cafe-meta">
+        <span class="stars">★★★★☆</span>
+        <span style="font-size:0.7rem; color:var(--text-muted);">💰 Lunch 1,500〜、Cafe 1,000〜</span>
+        <span style="font-size:0.7rem; color:var(--tigers-black);">中之島公園</span>
+      </div>
+      <div class="tip-actions" style="margin-top:8px;">
+        <button class="act-btn black" onclick="ms('Garb Weeks 中之島')">📍 マップ</button>
+      </div>
+    </div>
+    <div class="section-label" style="margin-top:16px;">💡 シーン別カフェ選びのコツ</div>
+    <div class="grid2">
+      <div class="q-btn" onclick="sn('カフェ 個室 大阪')"><span class="q-btn-icon">💑</span><div class="q-btn-label">デート・女子会</div><div class="q-btn-sub">個室・雰囲気重視</div></div>
+      <div class="q-btn" onclick="sn('カフェ wifi 電源 大阪')"><span class="q-btn-icon">💻</span><div class="q-btn-label">一人作業・勉強</div><div class="q-btn-sub">WiFi・電源あり</div></div>
+      <div class="q-btn" onclick="sn('カフェ 子連れ 大阪')"><span class="q-btn-icon">👶</span><div class="q-btn-label">子連れファミリー</div><div class="q-btn-sub">キッズスペース</div></div>
+      <div class="q-btn" onclick="sn('カフェ モーニング 大阪')"><span class="q-btn-icon">🌅</span><div class="q-btn-label">モーニング</div><div class="q-btn-sub">朝からしっかり</div></div>
+      <div class="q-btn" onclick="sn('純喫茶 大阪')"><span class="q-btn-icon">昭和</span><div class="q-btn-label">昭和レトロ</div><div class="q-btn-sub">純喫茶でまったり</div></div>
+      <div class="q-btn" onclick="sn('インスタ映え カフェ 大阪')"><span class="q-btn-icon">📸</span><div class="q-btn-label">インスタ映え</div><div class="q-btn-sub">映え写真を撮るで</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== ONSEN ======== -->
+<div class="section" id="sec-onsen">
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">♨️ 温泉・銭湯・スーパー銭湯</div>
+    </div>
+    <div class="hot-box">
+      <div class="hot-box-icon">🛁</div>
+      <div>
+        <div class="hot-box-title">大阪のお風呂事情</div>
+        <div class="hot-box-body">大阪は市内にも天然温泉のスーパー銭湯がめっちゃ多い。銭湯文化も残っとるから、サウナーにも楽園やで。週末の夕方は混むから、午前中が狙い目や。</div>
+      </div>
+    </div>
+    <div class="section-label">⭐ 市内おすすめスーパー銭湯</div>
+    <div class="onsen-card">
+      <div class="onsen-emoji">🎡</div>
+      <div class="onsen-info">
+        <div class="onsen-name">スパワールド 世界の大温泉</div>
+        <div class="onsen-access">📍 浪速区 / 地下鉄「動物園前」駅すぐ、JR「新今宮」駅すぐ</div>
+        <div class="onsen-tags">
+          <span class="onsen-tag">♨️ 世界の温泉</span>
+          <span class="onsen-tag">🏊 プール（スパプー）</span>
+          <span class="onsen-tag">💆 岩盤浴</span>
+          <span class="onsen-tag">🍜 食事処・宿泊可</span>
+        </div>
+        <div class="tip-body" style="margin-top:6px;">温泉というよりテーマパーク！ヨーロッパとアジアのテーマ別風呂が月替わりや。プールもあるし岩盤浴も充実、一日中おれるで。</div>
+        <div class="tip-actions" style="margin-top:8px;">
+          <button class="act-btn black" onclick="ms('スパワールド 世界の大温泉')">📍 マップ</button>
+        </div>
+      </div>
+    </div>
+    <div class="onsen-card">
+      <div class="onsen-emoji">🛁</div>
+      <div class="onsen-info">
+        <div class="onsen-name">天然温泉 なにわの湯</div>
+        <div class="onsen-access">📍 北区長柄 / 地下鉄「天神橋筋六丁目」駅から徒歩8分 / 駐車場あり</div>
+        <div class="onsen-tags">
+          <span class="onsen-tag">🧂 源泉かけ流し</span>
+          <span class="onsen-tag">🌌 屋上露天風呂</span>
+          <span class="onsen-tag">🫧 炭酸泉</span>
+          <span class="onsen-tag">💆 岩盤浴</span>
+          <span class="onsen-tag">📚 漫画コーナー</span>
+        </div>
+        <div class="tip-body" style="margin-top:6px;">ビルの屋上にある「天空の天然温泉」。露天風呂がめっちゃ広くて、夜空を見ながら入れるのが最高。サウナも充実。</div>
+        <div class="tip-actions" style="margin-top:8px;">
+          <button class="act-btn black" onclick="ms('天然温泉 なにわの湯')">📍 マップ</button>
+        </div>
+      </div>
+    </div>
+    <div class="onsen-card">
+      <div class="onsen-emoji">🌸</div>
+      <div class="onsen-info">
+        <div class="onsen-name">空庭温泉 OSAKA BAY TOWER</div>
+        <div class="onsen-access">📍 港区弁天町 / JR・地下鉄「弁天町」駅直結</div>
+        <div class="onsen-tags">
+          <span class="onsen-tag">👘 浴衣で散策</span>
+          <span class="onsen-tag">🏞️ 巨大日本庭園</span>
+          <span class="onsen-tag">♨️ 源泉かけ流し</span>
+          <span class="onsen-tag">🎎 安土桃山時代</span>
+        </div>
+        <div class="tip-body" style="margin-top:6px;">安土桃山時代をテーマにした関西最大級の温泉テーマパーク。浴衣に着替えて巨大な庭園や館内を散策できる、インスタ映えスポットや。</div>
+        <div class="tip-actions" style="margin-top:8px;">
+          <button class="act-btn black" onclick="ms('空庭温泉')">📍 マップ</button>
+        </div>
+      </div>
+    </div>
+    <div class="section-label" style="margin-top:16px;">🏛️ 地元銭湯・日帰り温泉</div>
+    <div class="tip">
+      <div class="tip-title">💡 大阪の銭湯活用術</div>
+      <div class="tip-body">大阪の銭湯はサウナが無料のところも多い（バスタオル持参とかルールはある）。料金は500円程度。昔ながらの雰囲気で、地元のおっちゃんらと触れ合えるのもええ。<a href="https://osaka-sento.com/" target="_blank">「大阪浴場組合」のサイト</a>で探すのが便利や。</div>
+      <div class="tip-actions">
+        <button class="act-btn black" onclick="sf('銭湯','current')">📍 近くの銭湯</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== SIGHTSEEING ======== -->
+<div class="section" id="sec-spot">
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">🏯 大阪観光スポット大全</div>
+      <a class="card-link" href="https://osaka-info.jp/" target="_blank">観光公式</a>
+    </div>
+    <div class="section-label">🌟 必訪！ド定番スポット</div>
+    <div class="tip">
+      <div class="tip-title">🏯 大阪城公園 <span class="tip-badge yellow">ランドマーク</span></div>
+      <div class="tip-body">豊臣秀吉ゆかりの名城。天守閣からの眺めは最高や。春は桜の名所で、園内はめっちゃ広いから散歩にもぴったり。ロードトレインとか御座船（おざぶね）もあって一日遊べる。</div>
+      <div class="tip-meta"><span>⏰ 天守閣：9:00〜17:00</span><span>💰 入園無料（天守閣600円）</span></div>
+      <div class="tip-actions">
+        <button class="act-btn filled" onclick="ms('大阪城公園')">🗺️ マップ</button>
+        <button class="act-btn" onclick="rs('大阪城公園')">🚶 ルート</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🐙 道頓堀 ＆ 心斎橋（ミナミ） <span class="tip-badge yellow">大阪の顔</span></div>
+      <div class="tip-body">グリコのサイン、カニ道楽の巨大看板、これぞ大阪！戎橋（えびすばし、通称ひっかけ橋）での記念写真は必須や。周りは食べ歩きの天国やで。</div>
+      <div class="tip-actions">
+        <button class="act-btn filled" onclick="ms('道頓堀 グリコ')">🗺️ マップ</button>
+        <button class="act-btn" onclick="rs('難波駅')">🚶 ルート</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🗼 通天閣 ＆ 新世界 <span class="tip-badge">レトロ</span></div>
+      <div class="tip-body">大阪のシンボルタワー。幸福の神様「ビリケンさん」の足の裏をかいて願い事しや。下は串カツ屋がひしめく新世界エリア、ディープな大阪を感じられるで。</div>
+      <div class="tip-actions">
+        <button class="act-btn filled" onclick="ms('通天閣')">🗺️ マップ</button>
+        <button class="act-btn" onclick="rs('通天閣')">🚶 ルート</button>
+      </div>
+    </div>
+    <div class="section-label">🏙️ 市内おすすめスポット</div>
+    <div class="tip">
+      <div class="tip-title">🎢 ユニバーサル・スタジオ・ジャパン (USJ) <span class="tip-badge yellow">世界レベル</span></div>
+      <div class="tip-body">言わずと知れた大人気テーマパーク。ハリー・ポッター、ミニオン、そして「スーパー・ニンテンドー・ワールド」は絶対外せん。朝から晩まで全力で遊ぶんや。</div>
+      <div class="tip-meta"><span>🚃 JRゆめ咲線「ユニバーサルシティ駅」直結</span></div>
+      <div class="tip-actions">
+        <button class="act-btn filled" onclick="ms('USJ')">🗺️ マップ</button>
+        <button class="act-btn" onclick="rs('USJ')">🚶 ルート</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🏢 梅田スカイビル（空中庭園展望台） <span class="tip-badge">絶景</span></div>
+      <div class="tip-body">空中庭園からの360度パノラマ絶景は最高や。特に夜景はロマンチックでデートにぴったり。</div>
+      <div class="tip-actions">
+        <button class="act-btn filled" onclick="ms('梅田スカイビル')">🗺️ マップ</button>
+        <button class="act-btn" onclick="rs('梅田スカイビル')">🚶 ルート</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🛍️ 黒門市場 <span class="tip-badge">食べ歩き</span></div>
+      <div class="tip-body">「大阪の台所」。新鮮な海鮮、フルーツ、精肉がずらり。その場で焼いて食べられる店が多くて、食べ歩きがめっちゃ楽しい。外国人観光客にも大人気や。</div>
+      <div class="tip-actions">
+        <button class="act-btn filled" onclick="ms('黒門市場')">🗺️ マップ</button>
+      </div>
+    </div>
+    <div class="section-label">近郊・ドライブスポット</div>
+    <div class="tip">
+      <div class="tip-title">🦈 海遊館 <span class="tip-badge yellow">水族館</span></div>
+      <div class="tip-body">世界最大級の水族館。巨大な太平洋水槽で泳ぐジンベエザメは圧巻や。</div>
+      <div class="tip-meta"><span>🚇 地下鉄「大阪港駅」徒歩5分</span></div>
+      <div class="tip-actions">
+        <button class="act-btn filled" onclick="ms('海遊館')">🗺️ マップ</button>
+        <button class="act-btn" onclick="rs('海遊館')">🚶 ルート</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🦌 奈良公園 <span class="tip-badge">ドライブ/電車</span></div>
+      <div class="tip-body">大阪から近鉄電車で約40分。野生の鹿と触れ合える。東大寺の大仏さんは絶対見るべきや。</div>
+      <div class="tip-actions">
+        <button class="act-btn filled" onclick="ms('奈良公園')">🗺️ マップ</button>
+        <button class="act-btn" onclick="rs('奈良公園')">🚗 ルート</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== DIALECT ======== -->
+<div class="section" id="sec-phrase">
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">🗣️ リアル大阪弁辞典</div>
+      <a class="card-link" href="https://ja.wikipedia.org/wiki/大阪弁" target="_blank">Wikipedia</a>
+    </div>
+    <div class="hot-box">
+      <div class="hot-box-icon">💡</div>
+      <div>
+        <div class="hot-box-title">大阪弁を使うコツ</div>
+        <div class="hot-box-body">テレビの芸人さんみたいにコテコテに話す必要はないで。イントネーションと、基本の単語を少し覚えるだけでめっちゃ親近感湧くから試してみてや！</div>
+      </div>
+    </div>
+    <div class="section-label">🔰 基本の大阪弁</div>
+    <div class="dialect-item">
+      <div class="dialect-word">めっちゃ</div>
+      <div class="dialect-body">
+        <div class="dialect-meaning">意味：「とても」「すごく」</div>
+        <div class="dialect-example">「これ、<em>めっちゃ</em>美味い！」標準語の「超」「とても」と同じ。最頻出単語や。さらに上は「めっさ」「ばり」。</div>
+      </div>
+    </div>
+    <div class="dialect-item">
+      <div class="dialect-word">なんでやねん</div>
+      <div class="dialect-body">
+        <div class="dialect-meaning">意味：「どうしてそうなるんだ」「ツッコミの基本」</div>
+        <div class="dialect-example">何か面白いこと、おかしなことがあった時の万能ツッコミ。相手がボケたら間髪入れずに言うんや。<em>「なんでなん？」</em>もよく使うで.</div>
+      </div>
+    </div>
+    <div class="dialect-item">
+      <div class="dialect-word">あかん</div>
+      <div class="dialect-body">
+        <div class="dialect-meaning">意味：「ダメだ」「良くない」「できない」</div>
+        <div class="dialect-example">「それは<em>あかん</em>わ〜」「もう<em>あかん</em>、お腹いっぱい」。禁止、不可能、否定、何でも使える。</div>
+      </div>
+    </div>
+    <div class="dialect-item">
+      <div class="dialect-word">ほんま</div>
+      <div class="dialect-body">
+        <div class="dialect-meaning">意味：「本当」「マジ」</div>
+        <div class="dialect-example">「<em>ほんま</em>に？」は「マジで？」。相槌として最強。同意の時にも使う。</div>
+      </div>
+    </div>
+    <div class="dialect-item">
+      <div class="dialect-word">ちゃう</div>
+      <div class="dialect-body">
+        <div class="dialect-meaning">意味：「違う」</div>
+        <div class="dialect-example">「これ、<em>ちゃう</em>？」は「これ、違うんじゃない？」。</div>
+      </div>
+    </div>
+    <div class="dialect-item">
+      <div class="dialect-word">ええ</div>
+      <div class="dialect-body">
+        <div class="dialect-meaning">意味：「良い」「上手い」</div>
+        <div class="dialect-example">「めっちゃ<em>ええ</em>やん！」。「良い」の全般。反対は「悪い」。</div>
+      </div>
+    </div>
+    <div class="dialect-item">
+      <div class="dialect-word">オモロい</div>
+      <div class="dialect-body">
+        <div class="dialect-meaning">意味：「面白い」</div>
+        <div class="dialect-example">大阪で一番の褒め言葉。「あいつは<em>オモロい</em>」は人間として最高という意味や。</div>
+      </div>
+    </div>
+    <div class="dialect-item">
+      <div class="dialect-word">まいど</div>
+      <div class="dialect-body">
+        <div class="dialect-meaning">意味：「毎度」「こんにちは/ありがとう」の挨拶</div>
+        <div class="dialect-example">商人（あきんど）の街、大阪の基本挨拶。お店に入る時、出る時、電話の第一声。</div>
+      </div>
+    </div>
+    <div class="section-label">💼 ビジネス・日常で使える便利フレーズ</div>
+    <div class="tip">
+      <div class="tip-title">👍 「おおきに」</div>
+      <div class="tip-body">意味：「ありがとう」。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">👍 「なんぼ」</div>
+      <div class="tip-body">意味：「いくら（値段）」。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">👍 「さら」</div>
+      <div class="tip-body">意味：「新品」。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">👍 「直す（なおす）」</div>
+      <div class="tip-body">意味：「（物を）元の場所に戻す、片付ける」。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">👍 「構へん（かまへん）」</div>
+      <div class="tip-body">意味：「構わない」「問題ない」「大丈夫」。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">👍 「勉強する」</div>
+      <div class="tip-body">意味：「（値段を）値引きする」。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== TALK ======== -->
+<div class="section" id="sec-talk">
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">💬 大阪鉄板トークネタ集</div>
+    </div>
+    <div class="hot-box">
+      <div class="hot-box-icon">🎯</div>
+      <div>
+        <div class="hot-box-title">アイスブレイクに使える鉄板ネタ</div>
+        <div class="hot-box-body">初対面、名刺交換、会食、移動中の雑談に。大阪人は話すのが大好きやから、ネタ振ったらめっちゃ喋ってくれるで！</div>
+      </div>
+    </div>
+
+    <div class="section-label">🐙 大阪トーク（鉄板20選）</div>
+    <div class="tip"><div class="tip-title">1. タイガースの話題は必須や</div><div class="tip-body">「昨日の阪神、凄かったですね！」（勝っても負けても、昨日の試合の話）。</div></div>
+    <div class="tip"><div class="tip-title">2. たこ焼き・お好み焼きは家にあるか？</div><div class="tip-body">「大阪の人って、家に必ずたこ焼き器あるんですか？」これは鉄板。</div></div>
+    <div class="tip"><div class="tip-title">3. 串カツ「二度づけ禁止」ルール</div><div class="tip-body">「二度づけ禁止、ほんまに厳しいんですか？」と聞く。</div></div>
+    <div class="tip"><div class="tip-title">4. 551の豚まん愛</div><div class="tip-body">「551の豚まん、新幹線で食べるか問題」を振る。</div></div>
+    <div class="tip"><div class="tip-title">5. 地下鉄の複雑さ（特に梅田）</div><div class="tip-body">「梅田の地下（梅ダンジョン）、迷子になりました…」。</div></div>
+    <div class="tip"><div class="tip-title">6. USJの新エリア情報</div><div class="tip-body">「マリオエリア行きました？整理券大変ですよね」。</div></div>
+    <div class="tip"><div class="tip-title">7. 大阪弁のレクチャーを頼む</div><div class="tip-body">「『あかん』と『構へん』の使い方、教えてください」。</div></div>
+    <div class="tip"><div class="tip-title">8. 大阪城の豊臣秀吉愛</div><div class="tip-body">「大阪城、秀吉公のパワー感じますね」。</div></div>
+    <div class="tip"><div class="tip-title">9. 「アメちゃん」文化</div><div class="tip-body">「大阪のおばちゃん、ほんまに飴くれるんですか？」。</div></div>
+    <div class="tip"><div class="tip-title">10. エスカレーター「右立ち」の罠</div><div class="tip-body">「エスカレーター、大阪だけ右に立つから焦ります」。東京（左立ち）との違いをネタに。</div></div>
+    <div class="tip"><div class="tip-title">11. 通天閣のビリケンさん</div><div class="tip-body">「ビリケンさんの足の裏、かいてきました！」</div></div>
+    <div class="tip"><div class="tip-title">12. グリコのポーズ</div><div class="tip-body">「戎橋でグリコポーズしました？」</div></div>
+    <div class="tip"><div class="tip-title">13. 大阪のデパ地下グルメ</div><div class="tip-body">「阪神のいか焼き、阪急のスフレ…デパ地下誘惑多すぎです」。</div></div>
+    <div class="tip"><div class="tip-title">14. 万博（Expo 夢洲）の話</div><div class="tip-body">「万博、楽しみですね！」</div></div>
+    <div class="tip"><div class="tip-title">15. キタ（梅田）とミナミ（難波）の違い</div><div class="tip-body">「キタはオシャレ、ミナミはディープ。どっちが好きですか？」。</div></div>
+    <div class="tip"><div class="tip-title">16. ヒョウ柄のおばちゃん</div><div class="tip-body">「ヒョウ柄のおばちゃん、アメ村にほんまにおるんですか？」。</div></div>
+    <div class="tip"><div class="tip-title">17. 大阪の結婚式は派手か？</div><div class="tip-body">「大阪の結婚式って、ゴージャスなんですか？」。</div></div>
+    <div class="tip"><div class="tip-title">18. まいどおおきに食堂</div><div class="tip-body">「『まいどおおきに食堂』、地元の名前がついてるの親近感湧きます」。</div></div>
+    <div class="tip"><div class="tip-title">19. りくろーおじさんのプルプル感</div><div class="tip-body">「りくろーおじさんのチーズケーキ、焼きたて食べました！」。</div></div>
+    <div class="tip"><div class="tip-title">20. 大阪の「勉強」＝「値切り」</div><div class="tip-body">「ビジネスで『勉強してください』と言われました。大阪の商売人魂感じます」。</div></div>
+  </div>
+</div>
+
+<!-- ======== TRANSPORT ======== -->
+<div class="section" id="sec-transport">
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">🚇 大阪の交通完全ガイド</div>
+    </div>
+    <div class="section-label">🚇 Osaka Metro（地下鉄）<span class="new-badge yellow">最強</span></div>
+    <div class="tip">
+      <div class="tip-title">🚇 メトロでどこでも行けるで</div>
+      <div class="tip-body">市内移動の基本。9路線あってめっちゃ便利。<br>
+        <strong>御堂筋線（レッド）</strong>：梅田・淀屋橋・本町・心斎橋・難波・天王寺を貫く最強路線。<br>
+        <strong>谷町線（パープル）</strong>：東梅田・天王寺・八尾方面、御堂筋のバイパス。<br>
+        <strong>中央線（グリーン）</strong>：大阪港・万博会場（夢洲）方面。<br>
+        ICカード（Suica、ICOCA）がそのまま使えるで。</div>
+      <div class="tip-actions">
+        <button class="act-btn black" onclick="window.open('https://subway.osakametro.co.jp/guide/routemap.php','_blank')">🌐 メトロ路線図</button>
+      </div>
+    </div>
+    <div class="section-label">🚃 JR西日本（環状線・アーバンネットワーク）</div>
+    <div class="tip">
+      <div class="tip-title">🚃 JR大阪環状線</div>
+      <div class="tip-body">大阪の中心をグルっと回る。<br>
+        <strong>主要駅：</strong>大阪・天満・京橋・鶴橋・天王寺・弁天町・西九条。<br>
+        西九条からゆめ咲線でUSJへ行ける。</div>
+      <div class="tip-actions">
+        <button class="act-btn black" onclick="window.open('https://www.jr-odekake.net/ekikan/kanjo/','_blank')">🌐 環状線情報</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🚆 JR関空快速・大和路快速</div>
+      <div class="tip-body">
+        <strong>関空快速：</strong>大阪〜天王寺〜日根野〜関空（関空へはこれ！）<br>
+        <strong>大和路快速：</strong>大阪〜天王寺〜奈良方面。</div>
+    </div>
+    <div class="section-label">私鉄王国・大阪（阪神・阪急・南海・近鉄・京阪）</div>
+    <div class="tip">
+      <div class="tip-title">🐯 阪神電車（梅田・難波発）</div>
+      <div class="tip-body">
+        <strong>本線（梅田発）：</strong>甲子園・神戸三宮方面。タイガース観戦には必須！<br>
+        <strong>なんば線（難波発）：</strong>尼崎で本線と接続、近鉄と相互直通で奈良・伊勢方面へも行ける。</div>
+      <div class="tip-actions">
+        <button class="act-btn black" onclick="window.open('https://rail.hanshin.co.jp/','_blank')">🌐 阪神電車</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🚈 南海電鉄（難波発）</div>
+      <div class="tip-body">
+        <strong>南海本線：</strong>堺・岸和田・和歌山市方面。特急ラピートで関空へ！<br>
+        <strong>高野線：</strong>高野山方面、堺東（堺市役所）へはここ。</div>
+      <div class="tip-actions">
+        <button class="act-btn black" onclick="window.open('https://www.nankai.co.jp/','_blank')">🌐 南海電鉄</button>
+      </div>
+    </div>
+    <div class="section-label">🚲 自転車（大阪はチャリ社会や！）</div>
+    <div class="tip">
+      <div class="tip-title">🚲 大阪市内は平坦でチャリが快適！</div>
+      <div class="tip-body">御堂筋も本町も平坦やから、チャリがめっちゃ多い。通勤・買い物・観光全部チャリが最強や。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🚲 シェアサイクル「大阪バイクシェア」<span class="tip-badge yellow">めっちゃ便利</span></div>
+      <div class="tip-body">赤い電動アシスト自転車が市内あちこちのポートにある。<strong>最初の30分165円</strong>。ポート間の乗り捨てOK！</div>
+      <div class="tip-actions">
+        <button class="act-btn black" onclick="window.open('https://www.osaka-bikeshare.discovers.jp/','_blank')">🌐 公式サイト</button>
+        <button class="act-btn filled" onclick="sf('シェアサイクル ポート','current')">📍 近くのポート</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">⚠️ 駐輪禁止エリアに注意！</div>
+      <div class="tip-body">放置したら即撤去される。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== CAR ======== -->
+<div class="section" id="sec-car">
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">🚘 大阪の自動車・ドライブガイド</div>
+    </div>
+    <div class="section-label">⛽ ガソリン・給油</div>
+    <div class="tip">
+      <div class="tip-title">⛽ 近くのガソリンスタンドを探す</div>
+      <div class="tip-body">高速に乗る前に満タンにするのが鉄則や。</div>
+      <div class="tip-actions">
+        <button class="act-btn filled" onclick="sn('ガソリンスタンド セルフ')">📍 セルフを探す</button>
+        <button class="act-btn black" onclick="sn('エネオス')">🔵 エネオス</button>
+        <button class="act-btn black" onclick="sn('コスモ石油')">🔴 コスモ</button>
+      </div>
+    </div>
+    <div class="section-label">🚗 車での移動・ルート</div>
+    <div class="tip">
+      <div class="tip-title">🛣️ 大阪市内の主要道路と渋滞ポイント</div>
+      <div class="tip-body">
+        <strong>新御堂筋（国道423号）：</strong>梅田〜北摂方面（千里中央）。<br>
+        <strong>中央大通：</strong>市内を東西に貫く。<br>
+        <strong>阪神高速：</strong>市内網羅。
+      </div>
+      <div class="tip-actions">
+        <button class="act-btn black" onclick="window.open('https://www.jartic.or.jp/','_blank')">🚗 道路交通情報</button>
+        <button class="act-btn black" onclick="window.open('https://www.hanshin-exp.co.jp/drivers/','_blank')">🌐 阪神高速</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🏎️ 高速道路（名神・近畿道・西名阪）</div>
+      <div class="tip-body">
+        <strong>名神高速：</strong>京都・名古屋・東京方面（吹田IC・豊中IC）<br>
+        <strong>近畿自動車道：</strong>吹田〜松原。<br>
+        <strong>西名阪自動車道：</strong>松原〜奈良方面。</div>
+    </div>
+    <div class="section-label">🅿️ 駐車場・パーキング</div>
+    <div class="tip">
+      <div class="tip-title">🅿️ 市内コインパーキング検索</div>
+      <div class="tip-body">akippaやタイムズのアプリで事前予約すると確実や。</div>
+      <div class="tip-actions">
+        <button class="act-btn filled" onclick="sn('コインパーキング')">📍 近くの駐車場</button>
+        <button class="act-btn black" onclick="window.open('https://times-info.net/','_blank')">🅿️ タイムズ</button>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🏢 大型施設の無料駐車場</div>
+      <div class="tip-body">
+        <strong>イオンモール鶴見緑地：</strong>約2,000台（無料、条件あり）<br>
+        <strong>ららぽーと門真：</strong>約4,300台（無料、条件あり）<br>
+        <strong>エキスポシティ：</strong>約4,000台（無料、条件あり）</div>
+    </div>
+    <div class="section-label">🔧 車のメンテナンス・修理</div>
+    <div class="tip">
+      <div class="tip-title">🔧 大阪市内のディーラー・修理</div>
+      <div class="tip-body">車検・タイヤ交換はオートバックス・イエローハットが便利や。</div>
+      <div class="tip-actions">
+        <button class="act-btn filled" onclick="sn('オートバックス 大阪')">🔧 オートバックス</button>
+        <button class="act-btn black" onclick="sn('車検 大阪')">🛠️ 車検を探す</button>
+      </div>
+    </div>
+    <div class="section-label">🚨 緊急時・ロードサービス</div>
+    <div class="tip">
+      <div class="tip-title">🆘 パンク・故障・事故の対応</div>
+      <div class="tip-body">
+        <strong>JAF：</strong>0570-00-8139（24時間）<br>
+        <strong>事故：</strong>110（警察）、119（救急）</div>
+      <div class="tip-actions">
+        <button class="act-btn filled" onclick="window.open('https://jaf.or.jp/common/local/kansai/osaka','_blank')">🆘 JAF 大阪</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== LOCAL TIPS ======== -->
+<div class="section" id="sec-tips">
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">📋 大阪ローカル常識・裏技</div>
+    </div>
+    <div class="section-label">🐯 タイガース文化を理解するで</div>
+    <div class="tip">
+      <div class="tip-title">🐯 タイガースは大阪の「宗教」<span class="tip-badge yellow">絶対理解必須</span></div>
+      <div class="tip-body">会話の基本は「昨日の阪神、凄かったですね！」や。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🙅 串カツ「二度づけ」はあかん！ <span class="tip-badge black">最重要</span></div>
+      <div class="tip-body">ソース足りん時はキャベツでソースすくって串にかけるんやで。</div>
+    </div>
+    <div class="section-label">🛍️ 買い物・生活の知恵</div>
+    <div class="tip">
+      <div class="tip-title">🛍️ デパ地下グルメが最強</div>
+      <div class="tip-body">阪神梅田本店（いか焼き、スナックパーク）、阪急うめだ本店（高級感）、大阪タカシマヤ（難波）。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🛒 地元スーパー「ライフ」「万代」</div>
+      <div class="tip-body">「ライフ」と「万代（まんだい）」が大阪の生活を支えとる。</div>
+      <div class="tip-actions">
+        <button class="act-btn black" onclick="sf('ライフ','current')">📍 近くのライフ</button>
+        <button class="act-btn black" onclick="sf('万代','current')">📍 近くの万代</button>
+      </div>
+    </div>
+    <div class="section-label">☀️ 気候・防災情報</div>
+    <div class="tip">
+      <div class="tip-title">☀️ 夏は死ぬほど暑い！冬は意外と寒い</div>
+      <div class="tip-body"><a href="https://www.jma-net.go.jp/osaka/">⛈️ 大阪気象台</a>をチェック。</div>
+    </div>
+    <div class="section-label">🍺 飲み屋街情報</div>
+    <div class="tip">
+      <div class="tip-title">🏮 キタ（梅田）とミナミ（難波・心斎橋）</div>
+      <div class="tip-body">
+        <strong>キタ：</strong>梅田周辺。<br>
+        <strong>ミナミ：</strong>難波・心斎橋・道頓堀。ディープな居酒屋.</div>
+      <div class="tip-actions">
+        <button class="act-btn black" onclick="sf('居酒屋 難波 宗右衛門町','none')">🍺 居酒屋を探す</button>
+      </div>
+    </div>
+    <div class="section-label">🚶 知っておくと便利な豆知識</div>
+    <div class="tip">
+      <div class="tip-title">🚶 エスカレーターは「右立ち」が基本</div>
+      <div class="tip-body">大阪だけエスカレーターの右側に立ち、左側を空ける人が多い。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">🌉 「まいど」挨拶は商人（あきんど）の基本</div>
+      <div class="tip-body">「構へん（かまへん）」は「大丈夫」「問題ない」。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title"> hospitals🏨 Hospitals</div>
+      <div class="tip-body">
+        <strong>救急：119</strong>、<strong>警察：110</strong><br>
+        <strong>大阪市急病診療所：</strong>06-6534-0321（24時間）</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">📱 大阪で役立つアプリ</div>
+      <div class="tip-body">
+        📱 <strong>Yahoo!カーナビ</strong>：チャリでも使える<br>
+        📱 <strong>大阪バイクシェア</strong>：シェアサイクルに必須<br>
+        📱 <strong>メトロ路線図アプリ</strong>：複雑なメトロを把握するで<br>
+        📱 <strong>タイガース公式アプリ</strong>：試合速報・チケット購入</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== DIARY ======== -->
+<div class="section" id="sec-diary">
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">🤖 AI日記アシスタント</div>
+    </div>
+    <div style="font-size:0.78rem; color:var(--text-muted); margin-bottom:14px; line-height:1.6;">今日の出来事を入力してみてや。AIが優しく丁寧な大阪弁で、労いのフィードバックをするから💐</div>
+    <div class="diary-label">✨ よかったこと（成果・嬉しかったこと）</div>
+    <textarea class="diary-area" id="ai-good" placeholder="例：・取引先との交渉がうまくいったんや！&#10;・晩ご飯がめっちゃ美味しく作れたから満足やで"></textarea>
+    <div class="diary-label">😔 もやもや・課題</div>
+    <textarea class="diary-area" id="ai-bad" placeholder="例：・会議が長引いてめっちゃ疲れたわ...&#10;・メトロが混んどって座れんくてしんどかったわ"></textarea>
+    <button class="btn-primary" id="ai-btn" onclick="submitAI()">✉️ AIからお返事をもらうで送信！</button>
+    <div class="ai-response-box" id="ai-resp">
+      <div class="ai-response-header">🤖 AIからのお返事やで</div>
+      <div class="ai-response-text" id="ai-resp-text"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">✅ マイタスクリスト</div>
+    </div>
+    <div class="todo-input-row">
+      <input type="text" id="todo-input" class="todo-input" placeholder="新しいタスクを追加するで">
+      <input type="date" id="todo-date" class="todo-input" style="width:130px; flex-shrink:0;">
+      <button class="todo-add-btn" onclick="addTodo()">＋</button>
+    </div>
+    <div id="todo-list"></div>
+  </div>
+</div>
+
+<!-- ======== CALCULATOR ======== -->
+<div class="section" id="sec-calc">
+  <div class="card">
+    <div class="card-head"><div class="card-title">🍻 割り勘計算</div></div>
+    <div class="calc-group">
+      <div class="calc-row">
+        <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); width:70px; flex-shrink:0;">合計金額</label>
+        <input type="number" id="sp-total" class="calc-input" placeholder="例：15000" oninput="calcSplit()">
+        <span class="calc-unit">円</span>
+      </div>
+      <div class="calc-row">
+        <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); width:70px; flex-shrink:0;">人数</label>
+        <input type="number" id="sp-ppl" class="calc-input" placeholder="例：4" oninput="calcSplit()">
+        <span class="calc-unit">人</span>
+      </div>
+    </div>
+    <div class="calc-result">
+      <div class="calc-result-label">1人あたり（100円切り上げ）</div>
+      <div class="calc-result-val"><span id="sp-result">0</span> 円やで</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">🧾 消費税計算</div>
+      <a class="card-link" href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6303.htm" target="_blank">国税庁</a>
+    </div>
+    <div class="calc-group">
+      <div class="calc-row">
+        <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); width:70px; flex-shrink:0;">税抜金額</label>
+        <input type="number" id="tax-base" class="calc-input" placeholder="例：1000" oninput="calcTax()">
+        <span class="calc-unit">円</span>
+      </div>
+      <div class="tax-radio-row">
+        <label class="tax-radio"><input type="radio" name="tax" value="1.1" checked onchange="calcTax()"> 10%（通常）</label>
+        <label class="tax-radio"><input type="radio" name="tax" value="1.08" onchange="calcTax()"> 8%（軽減税率）</label>
+      </div>
+    </div>
+    <div class="calc-result">
+      <div class="calc-result-label">税込金額</div>
+      <div class="calc-result-val"><span id="tax-result">0</span> 円やで</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><div class="card-title">⛽ ガソリン代計算</div></div>
+    <div class="calc-group">
+      <div class="calc-row">
+        <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); width:70px; flex-shrink:0;">走行距離</label>
+        <input type="number" id="fuel-dist" class="calc-input" placeholder="例：100" oninput="calcFuel()">
+        <span class="calc-unit">km</span>
+      </div>
+      <div class="calc-row">
+        <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); width:70px; flex-shrink:0;">燃費</label>
+        <input type="number" id="fuel-eff" class="calc-input" placeholder="例：15" oninput="calcFuel()">
+        <span class="calc-unit">km/L</span>
+      </div>
+      <div class="calc-row">
+        <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); width:70px; flex-shrink:0;">ガソリン単価</label>
+        <input type="number" id="fuel-price" class="calc-input" placeholder="例：175" oninput="calcFuel()">
+        <span class="calc-unit">円/L</span>
+      </div>
+    </div>
+    <div class="calc-result">
+      <div class="calc-result-label">ガソリン代目安</div>
+      <div class="calc-result-val"><span id="fuel-result">0</span> 円やで</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><div class="card-title">🚃 交通費精算（Osaka Metro）</div></div>
+    <div style="font-size:0.78rem; color:var(--text-muted); margin-bottom:12px;">Osaka Metro（地下鉄）の料金は区間制や。参考：市内中心部（1区）は190円（IC同額）。2区240円、3区290円。</div>
+    <div class="calc-group">
+      <div class="calc-row">
+        <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); width:80px; flex-shrink:0;">1回の料金</label>
+        <input type="number" id="transit-price" class="calc-input" placeholder="例：190" oninput="calcTransit()">
+        <span class="calc-unit">円</span>
+      </div>
+      <div class="calc-row">
+        <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); width:80px; flex-shrink:0;">回数</label>
+        <input type="number" id="transit-count" class="calc-input" placeholder="例：4" oninput="calcTransit()">
+        <span class="calc-unit">回</span>
+      </div>
+    </div>
+    <div class="calc-result">
+      <div class="calc-result-label">合計交通費</div>
+      <div class="calc-result-val"><span id="transit-result">0</span> 円やで</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">🐯 大阪WEB！メガ！ 🐯</div>
+  <div>猛虎爆走！めっちゃ充実した大阪ライフを送るんや🕊️</div>
+  <div style="margin-top:6px;">© 2026 大阪WEBメガ！ All Rights Reserved.</div>
+</footer>
+
+<button class="scroll-top" id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ===== DATE/TIME =====
+function updateDT() {
+  const now = new Date();
+  const days = ['日','月','火','水','木','金','土'];
+  const d = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日(${days[now.getDay()]})`;
+  const t = now.toTimeString().slice(0,5);
+  document.getElementById('dt-time').textContent = t;
+  document.getElementById('dt-date').textContent = d;
+}
+updateDT();
+setInterval(updateDT, 10000);
+
+// ===== TABS =====
+const tabIds = ['home','tigers','map','food','cafe','onsen','spot','phrase','talk','transport','car','tips','diary','calc'];
+
+// ===== BATTING FORTUNE (no animation) =====
+let battingLocked = false;
+async function startBatting() {
+  if (battingLocked) return;
+  battingLocked = true;
+  const btn = document.getElementById('bat-btn');
+  const resultEl = document.getElementById('batting-result');
+  btn.style.opacity = '0.5';
+  resultEl.style.display = 'block';
+  resultEl.textContent = '⏳ 占い中やで…';
+
+  const outcomes = ['💥 ホームラン！場外弾や！パチーン！','⚾ 完璧な当たり！二塁打！','🎯 センター前ヒット！','🔥 ライト線への長打！','😱 内野フライ…アウト','💨 空振り三振！次は打つで！','🙈 ボール球に手を出した…','✊ デッドボール！出塁や！'];
+  const outcome = outcomes[Math.floor(Math.random() * outcomes.length)];
+  await showResult(outcome);
+  btn.style.opacity = '1';
+  battingLocked = false;
+}
+
+async function showResult(outcome) {
+  const resultEl = document.getElementById('batting-result');
+  resultEl.style.display = 'block';
+  resultEl.textContent = outcome + '　占い取得中やで…';
+  const now = new Date();
+  const dateStr = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日(${['日','月','火','水','木','金','土'][now.getDay()]})`;
+  const prompt = `あなたはバッティング占い師です。今日の日付と打撃結果を踏まえて、必ず「自分なあ、」で始まる前向きで元気になれる今日の運勢を大阪弁で60文字以内で一言だけ返してください。余計な説明や改行は不要です。【今日の日付】${dateStr}【打撃結果】${outcome}`;
+  const gasUrl = 'https://script.google.com/macros/s/AKfycbxT2T8HcLaGMSnaKzwR0AbtXu1QD6tZ5e638EHaQwI5zW4nrgTsYTW_QaJFhyoyvg/exec';
+  try {
+    const resp = await fetch(gasUrl, {method:'POST', body: JSON.stringify({prompt})});
+    const data = await resp.json();
+    const fortune = (data.message || '').trim() || '今日はめっちゃええ一日になるで！';
+    resultEl.innerHTML = `<span style="color:var(--tigers-yellow)">${outcome}</span><br><span style="color:white;font-weight:500;">${fortune}</span>`;
+  } catch(e) {
+    const fallbacks = [
+      '今日はホームランや！思い切って行動したら道が開けるで！',
+      '打撃好調や！積極的に攻めたら今日はめっちゃええことあるで！',
+      '今日はじっくり待って好球必打！チャンスを逃さんようにしてや！',
+      '空振りしても次の一球に集中や！前向きにいこや！',
+    ];
+    const fortune = fallbacks[Math.floor(Math.random() * fallbacks.length)];
+    resultEl.innerHTML = `<span style="color:var(--tigers-yellow)">${outcome}</span><br><span style="color:white;font-weight:500;">${fortune}</span>`;
+  }
+}
+function tab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  const idx = tabIds.indexOf(id);
+  if(idx >= 0) document.querySelectorAll('.nav-btn')[idx].classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ===== MAP HELPERS =====
+function initMap() {
+  const stat = document.getElementById('map-status');
+  const frame = document.getElementById('map-frame');
+  if(!navigator.geolocation){ stat.textContent = '❌ GPS非対応のブラウザやわ'; return; }
+  stat.textContent = '⏳ 現在地を取得しとるから待ってや...';
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      frame.src = `https://maps.google.co.jp/maps?q=${pos.coords.latitude},${pos.coords.longitude}&z=15&output=embed`;
+      stat.textContent = '✅ 現在地取得成功！';
+    },
+    () => {
+      frame.src = 'https://maps.google.co.jp/maps?q=大阪駅&output=embed';
+      stat.textContent = '❌ 取得できんかったから、大阪駅周辺を表示しとるよ';
+    },
+    {enableHighAccuracy:true, timeout:6000}
+  );
+}
+function routeTo() {
+  const dest = document.getElementById('route-dest').value.trim();
+  if(!dest){ alert('行き先を入力してな！'); return; }
+  window.open('https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(dest), '_blank');
+}
+function sn(kw) { window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(kw + ' 近く'), '_blank'); }
+function ms(spot) { window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(spot), '_blank'); }
+function rs(spot) { window.open('https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(spot), '_blank'); }
+function sf(food, type) {
+  let q = type === 'current' ? food + ' 近く' : type === 'osaka' ? '大阪 大阪駅周辺 ' + food : food;
+  window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q), '_blank');
+}
+
+// ===== WEATHER =====
+async function loadWeather() {
+  const wmap = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌧️',63:'🌧️',65:'🌧️',71:'🌨️',73:'🌨️',75:'❄️',80:'🌦️',81:'🌧️',82:'⛈️',95:'⛈️'};
+  const wdesc = {0:'快晴や！',1:'晴れや',2:'一部曇りやね',3:'曇りや',45:'霧や',51:'小雨',53:'雨やね',55:'めっちゃ強い雨',61:'小雨',63:'雨やね',65:'強い雨',71:'小雪',73:'雪',75:'大雪！',80:'にわか雨',81:'雨',82:'激しい雨',95:'雷雨やで'};
+  const fdays = ['今日','明日','明後日'];
+  try {
+    const r = await fetch('https://api.open-meteo.com/v1/forecast?latitude=34.6937&longitude=135.5021&current=temperature_2m,weathercode,windspeed_10m,relative_humidity_2m&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&forecast_days=3');
+    const d = await r.json();
+    const cur = d.current;
+    const code = cur.weathercode;
+    const icon = wmap[code] || '🌡️';
+    const desc = wdesc[code] || '';
+    document.getElementById('hdr-temp').textContent = Math.round(cur.temperature_2m) + '°C';
+    let fc = '';
+    for(let i=0;i<3;i++){
+      fc += `<div class="forecast-item">
+        <div class="fc-day">${fdays[i]}</div>
+        <div class="fc-icon">${wmap[d.daily.weathercode[i]] || '🌡️'}</div>
+        <div class="fc-temp">${Math.round(d.daily.temperature_2m_max[i])}° <span class="fc-low">${Math.round(d.daily.temperature_2m_min[i])}°</span></div>
+      </div>`;
+    }
+    document.getElementById('weather-area').innerHTML = `
+      <div class="weather-main">
+        <div class="weather-icon">${icon}</div>
+        <div class="weather-info">
+          <div class="weather-temp">${Math.round(cur.temperature_2m)}°C</div>
+          <div class="weather-desc">${desc}</div>
+          <div class="weather-sub"><span>💧 湿度 ${cur.relative_humidity_2m}%</span><span>💨 ${Math.round(cur.windspeed_10m)}km/h</span></div>
+          <div class="weather-sub"><span>最高 ${Math.round(d.daily.temperature_2m_max[0])}°</span><span>最低 ${Math.round(d.daily.temperature_2m_min[0])}°</span></div>
+        </div>
+      </div>
+      <div class="forecast-row">${fc}</div>`;
+  } catch(e) {
+    document.getElementById('weather-area').innerHTML = `<div class="map-status">天気情報取れんかったわ💦 <a href="https://weather.yahoo.co.jp/weather/27/6200.html" target="_blank" style="color:var(--tigers-black);">Yahoo!天気で確認してや</a></div>`;
+  }
+}
+loadWeather();
+
+// ===== RAIN RADAR (JMA nowcast tiles on canvas) =====
+async function loadRadar() {
+  const canvas = document.getElementById('radar-canvas');
+  const statusEl = document.getElementById('radar-status');
+  const timeEl = document.getElementById('radar-time');
+  if (!canvas) return;
+  statusEl.textContent = '⏳ 雨雲データ取ってきとるで…';
+
+  // --- map params (大阪市中心付近) ---
+  const ZOOM = 8;
+  const LAT  = 34.6937;
+  const LON  = 135.5021;
+  const TILE_SIZE = 256;
+  const COLS = 3, ROWS = 3;      // 3×3タイルグリッド = 768×768px描画後にリサイズ
+  const PW = TILE_SIZE * COLS;
+  const PH = TILE_SIZE * ROWS;
+
+  const dpr = window.devicePixelRatio || 1;
+  const dispW = canvas.parentElement.offsetWidth || 360;
+  const dispH = Math.round(dispW * 0.65);
+  canvas.width  = dispW * dpr;
+  canvas.height = dispH * dpr;
+  canvas.style.height = dispH + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  // tile coords for center
+  function latLonToTile(lat, lon, z) {
+    const n = Math.pow(2, z);
+    const x = Math.floor((lon + 180) / 360 * n);
+    const latRad = lat * Math.PI / 180;
+    const y = Math.floor((1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2 * n);
+    return {x, y};
+  }
+  const center = latLonToTile(LAT, LON, ZOOM);
+  const startX = center.x - 1;
+  const startY = center.y - 1;
+
+  // pixel offset of center within the 3×3 grid
+  function tilePixelOffset(lat, lon, z, tx, ty) {
+    const n = Math.pow(2, z);
+    const px = ((lon + 180) / 360 * n - tx) * TILE_SIZE;
+    const latRad = lat * Math.PI / 180;
+    const py = ((1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2 * n - ty) * TILE_SIZE;
+    return {px, py};
+  }
+  const off = tilePixelOffset(LAT, LON, ZOOM, startX, startY);
+
+  // src rect: center dispW×dispH region around the lat/lon center pixel
+  const srcX = Math.round(off.px - dispW / 2);
+  const srcY = Math.round(off.py - dispH / 2);
+
+  // draw helper: load image with CORS
+  function loadImg(url) {
+    return new Promise((res, rej) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload  = () => res(img);
+      img.onerror = () => rej(new Error('img load failed: ' + url));
+      img.src = url;
+    });
+  }
+
+  try {
+    // 1. Fetch latest nowcast time from JMA
+    const tjson = await fetch('https://www.jma.go.jp/bosai/jmatile/data/nowc/targetTimes_N1.json').then(r => r.json());
+    const latest = tjson[0]; // descending order, [0] is newest
+    const bt = latest.basetime;   // e.g. "20240601055500"
+    const vt = latest.validtime;
+
+    // Format for display: "YYYYMMDDHHmm" → "HH:mm"
+    const hh = bt.slice(8, 10), mm = bt.slice(10, 12);
+    timeEl.textContent = `気象庁 ${hh}:${mm} 現在`;
+
+    // 2. Draw OSM base tiles first (background map)
+    const offscreenBase = document.createElement('canvas');
+    offscreenBase.width  = PW;
+    offscreenBase.height = PH;
+    const bctx = offscreenBase.getContext('2d');
+
+    const basePromises = [];
+    for (let dy = 0; dy < ROWS; dy++) {
+      for (let dx = 0; dx < COLS; dx++) {
+        const tx = startX + dx, ty = startY + dy;
+        basePromises.push(
+          loadImg(`https://tile.openstreetmap.org/${ZOOM}/${tx}/${ty}.png`)
+            .then(img => bctx.drawImage(img, dx * TILE_SIZE, dy * TILE_SIZE))
+            .catch(() => {}) // skip failed tiles silently
+        );
+      }
+    }
+    await Promise.all(basePromises);
+
+    // 3. Draw radar tiles on top (JMA nowcast)
+    const radarPromises = [];
+    for (let dy = 0; dy < ROWS; dy++) {
+      for (let dx = 0; dx < COLS; dx++) {
+        const tx = startX + dx, ty = startY + dy;
+        const radarUrl = `https://www.jma.go.jp/bosai/jmatile/data/nowc/${bt}/none/${vt}/surf/hrpns/${ZOOM}/${tx}/${ty}.png`;
+        radarPromises.push(
+          loadImg(radarUrl)
+            .then(img => bctx.drawImage(img, dx * TILE_SIZE, dy * TILE_SIZE))
+            .catch(() => {})
+        );
+      }
+    }
+    await Promise.all(radarPromises);
+
+    // 4. Crop and draw onto visible canvas
+    ctx.clearRect(0, 0, dispW, dispH);
+    ctx.drawImage(offscreenBase, srcX, srcY, dispW, dispH, 0, 0, dispW, dispH);
+
+    // 5. Crosshair at center
+    const cx = dispW / 2, cy = dispH / 2;
+    ctx.strokeStyle = 'rgba(255,204,0,0.85)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(cx - 10, cy); ctx.lineTo(cx + 10, cy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx, cy - 10); ctx.lineTo(cx, cy + 10); ctx.stroke();
+
+    statusEl.textContent = '✅ 大阪市周辺の雨雲 (気象庁 高解像度降水ナウキャスト)';
+  } catch(e) {
+    ctx.fillStyle = '#1a1a2a';
+    ctx.fillRect(0, 0, dispW, dispH);
+    ctx.fillStyle = 'rgba(255,255,255,0.7)';
+    ctx.font = '13px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('レーダーデータ取れんかったわ', dispW / 2, dispH / 2 - 10);
+    ctx.font = '11px sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.fillText('下のリンクから気象庁で確認してや', dispW / 2, dispH / 2 + 14);
+    statusEl.innerHTML = '❌ 取得失敗 → <a href="https://www.jma.go.jp/bosai/nowc/" target="_blank" style="color:var(--tigers-black);">気象庁ナウキャストを開く</a>';
+  }
+}
+loadRadar();
+
+// ===== AI NEWS (大阪 & 全国) =====
+async function loadTicker() {
+  const el = document.getElementById('ticker-inner');
+  const fallbackItems = [
+    '🐯 猛虎爆走！2026シーズン開幕中やで',
+    '🐙 大阪のソウルフード・たこ焼きは年中無休や！',
+    '🥘 串カツ「二度づけ禁止」はあかんで！絶対守りや',
+    '🚲 バイクシェアで大阪市内をサクッと移動するで',
+    '🏢 グラングリーン大阪（うめきた2期） 2025年から段階オープン！',
+    '🏗️ 2025年大阪・関西万博（Expo 2025） 開幕迫る！',
+    '🚇 Osaka Metro 中央線延伸・夢洲駅が登場や',
+    '🎢 USJ「スーパー・ニンテンドー・ワールド」は絶対外せんで',
+  ];
+  
+  el.textContent = '⏳ AIが今日のニュースをまとめてるで…';
+  
+  const now = new Date();
+  const dateStr = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日`;
+  // プロンプト：今日の大阪と全国のニュースをAIに生成させる
+  const prompt = `あなたは大阪のベテランニュース編集者です。今日(${dateStr})の「大阪の地元ニュース」を3つと「全国の主要ニュース」を3つ、合計6つのニュース見出しをAIとして創作(捏造はせず、ありそうな話題)してください。各見出しは20〜30文字程度で、必ず自然な大阪弁の語尾(〜や、〜やで、〜やねん、など)にしてください。6つの見出しを「⬤」で繋いだ1本のテキストとして返してください。見出し以外の説明や改行は不要です。\n例：大阪城公園で桜が満開やで⬤タイガースが劇回勝利や⬤万博会場の建設が進んどるで⬤全国的に五月晴れや⬤新テクロノジーが発表されたんや⬤経済が回復傾向や`;
+  
+  const gasUrl = 'https://script.google.com/macros/s/AKfycbxT2T8HcLaGMSnaKzwR0AbtXu1QD6tZ5e638EHaQwI5zW4nrgTsYTW_QaJFhyoyvg/exec';
+  
+  try {
+    const resp = await fetch(gasUrl, {method:'POST', body: JSON.stringify({prompt})});
+    const data = await resp.json();
+    const newsString = (data.message || '').trim();
+    
+    if(!newsString || !newsString.includes('⬤')){ throw new Error('invalid response'); }
+    
+    // キーワードとURLのマップ（広島版を大阪版に修正）
+    const kwMap = [
+      { re: /タイガース/,           url: 'https://hanshintigers.jp/' },
+      { re: /甲子園/,               url: 'https://www.google.com/maps/search/?api=1&query=阪神甲子園球場' },
+      { re: /USJ|ユニバ/,           url: 'https://www.usj.co.jp/' },
+      { re: /たこ焼き|お好み焼き/,     url: 'https://osaka-info.jp/gourmet/' },
+      { re: /串カツ|新世界/,         url: 'https://www.google.com/maps/search/?api=1&query=串カツ+新世界' },
+      { re: /メトロ|地下鉄/,         url: 'https://www.osaka-subway.com/' },
+      { re: /大阪城/,               url: 'https://www.google.com/maps/search/?api=1&query=大阪城公園' },
+      { re: /道頓堀|心斎橋|グリコ/,   url: 'https://osaka-info.jp/spot/' },
+      { re: /万博|Expo/,            url: 'https://www.expo2025.or.jp/' },
+      { re: /うめきた|グラングリーン/, url: 'https://purari.com/umekita/' },
+      { re: /天気|気象|雨|台風/,      url: 'https://weather.yahoo.co.jp/weather/27/6200.html' },
+      { re: /地震/,                 url: 'https://www.jma.go.jp/bosai/map.html#5/34.7/135.5/&elem=int' },
+      { re: /経済|株|円/,            url: 'https://finance.yahoo.co.jp/' },
+      { re: /政治|政府/,            url: 'https://www.nikkei.com/politics/' },
+    ];
+    
+    // 見出しにリンクを埋め込む関数
+    function enrichLink(headline) {
+      for (const kw of kwMap) {
+        if (kw.re.test(headline)) {
+          // マッチしたキーワードをリンクにする
+          return headline.replace(kw.re, match => `<a href="${kw.url}" target="_blank" style="color:var(--tigers-black);text-decoration:underline;">${match}</a>`);
+        }
+      }
+      // マッチしない場合は、見出し全体をGoogle検索リンクにする
+      const searchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(headline.replace(/やで|やねん|や|わ/g,''));
+      return `<a href="${searchUrl}" target="_blank" style="color:var(--tigers-black);text-decoration:none;">${headline}</a>`;
+    }
+    
+    const headlines = newsString.split('⬤');
+    const html = headlines.map(h => enrichLink(h.trim())).join('⬤ &nbsp;&nbsp;&nbsp;');
+    el.innerHTML = '🤖AIニュース： ' + html + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+    
+  } catch(e) {
+    // 失敗した場合はスタティックなフォールバックを表示
+    el.textContent = fallbackItems.join('　⚡　') + '　　　　　';
+  }
+  
+  // アニメーションのリセット（クローン作成）
+  const parent = el.parentElement;
+  const clone = el.cloneNode(true);
+  parent.replaceChild(clone, el);
+}
+loadTicker();
+// 10分ごとにニュースを更新
+setInterval(loadTicker, 10 * 60 * 1000);
+
+function calcSplit() {
+  const t = parseFloat(document.getElementById('sp-total').value) || 0;
+  const p = parseFloat(document.getElementById('sp-ppl').value) || 1;
+  document.getElementById('sp-result').textContent = (Math.ceil((t / p) / 100) * 100).toLocaleString();
+}
+function calcTax() {
+  const b = parseFloat(document.getElementById('tax-base').value) || 0;
+  const r = parseFloat(document.querySelector('input[name="tax"]:checked').value);
+  document.getElementById('tax-result').textContent = Math.floor(b * r).toLocaleString();
+}
+function calcFuel() {
+  const dist = parseFloat(document.getElementById('fuel-dist').value) || 0;
+  const eff = parseFloat(document.getElementById('fuel-eff').value) || 1;
+  const price = parseFloat(document.getElementById('fuel-price').value) || 0;
+  document.getElementById('fuel-result').textContent = Math.floor((dist / eff) * price).toLocaleString();
+}
+function calcTransit() {
+  const price = parseFloat(document.getElementById('transit-price').value) || 0;
+  const count = parseFloat(document.getElementById('transit-count').value) || 0;
+  document.getElementById('transit-result').textContent = (price * count).toLocaleString();
+}
+
+// ===== AI DIARY =====
+async function submitAI() {
+  const good = document.getElementById('ai-good').value.trim();
+  const bad = document.getElementById('ai-bad').value.trim();
+  if(!good && !bad){ alert('よかったこと・もやもやを入力してちょうだいね！'); return; }
+  const btn = document.getElementById('ai-btn');
+  btn.textContent = '⏳ AIが一生懸命考えとるから待ってや...';
+  btn.disabled = true;
+  const now = new Date();
+  const dateStr = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日`;
+  const prompt = `あなたは多忙なビジネスパーソンを優しくサポートする優秀な秘書AIです。以下のユーザーの今日の「よかったこと」と「悪かったこと」を分析し、明日への活力となるような労いと論理的なフィードバックを2〜3文程度で返してください。トーンは丁寧で温かみがあり、語尾や表現に「自然で上品な大阪弁（〜やで、〜やね、〜や、など）」を使ってください。極端な吉本新喜劇のような言葉は避けてください。\n【今日の日付】${dateStr}\n【よかったこと】${good || 'なし'}\n【悪かったこと】${bad || 'なし'}`;
+  const gasUrl = 'https://script.google.com/macros/s/AKfycbxT2T8HcLaGMSnaKzwR0AbtXu1QD6tZ5e638EHaQwI5zW4nrgTsYTW_QaJFhyoyvg/exec';
+  try {
+    const resp = await fetch(gasUrl, {method:'POST', body: JSON.stringify({prompt})});
+    const data = await resp.json();
+    document.getElementById('ai-resp-text').innerHTML = data.message.replace(/\n/g,'<br>');
+    document.getElementById('ai-resp').style.display = 'block';
+  } catch(e) {
+    document.getElementById('ai-resp-text').textContent = '通信エラーが起きたみたいやね。ネットワーク環境を確認してみてや。';
+    document.getElementById('ai-resp').style.display = 'block';
+  } finally {
+    btn.textContent = '✉️ AIからお返事をもらうで送信！';
+    btn.disabled = false;
+  }
+}
+
+// ===== TODO =====
+let todos = JSON.parse(localStorage.getItem('osaka_mega_todos') || '[]');
+function saveTodos(){ localStorage.setItem('osaka_mega_todos', JSON.stringify(todos)); }
+function escapeHtml(s){ return s.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function renderTodos() {
+  const el = document.getElementById('todo-list');
+  if(!todos.length){ el.innerHTML='<div style="text-align:center; color:var(--text-muted); font-size:0.8rem; padding:12px;">タスクはまだないから、追加してみてや</div>'; return; }
+  el.innerHTML = todos.map((t,i) => `
+    <div class="todo-item ${t.done?'done':''}">
+      <input type="checkbox" class="todo-cb" ${t.done?'checked':''} onchange="toggleTodo(${i})">
+      <span class="todo-text">${escapeHtml(t.text)}</span>
+      ${t.date ? `<span class="todo-date">${t.date}</span>` : ''}
+      <button class="todo-del" onclick="delTodo(${i})">🗑️</button>
+    </div>`).join('');
+}
+function addTodo() {
+  const text = document.getElementById('todo-input').value.trim();
+  if(!text){ alert('タスクを入力してな'); return; }
+  const date = document.getElementById('todo-date').value;
+  todos.push({text, date, done:false});
+  document.getElementById('todo-input').value = '';
+  document.getElementById('todo-date').value = '';
+  saveTodos(); renderTodos();
+}
+function toggleTodo(i){ todos[i].done = !todos[i].done; saveTodos(); renderTodos(); }
+function delTodo(i){ if(confirm('削除してもええ？')){ todos.splice(i,1); saveTodos(); renderTodos(); } }
+renderTodos();
+
+// ===== SCROLL TOP =====
+window.addEventListener('scroll', () => {
+  document.getElementById('scroll-top').classList.toggle('visible', window.scrollY > 300);
+});
+</script>
+</body>
+</html>
